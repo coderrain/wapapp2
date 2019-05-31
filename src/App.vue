@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+  123567890
     <router-view></router-view>
   </div>
 </template>
@@ -9,11 +10,7 @@
 export default {
   name: 'app',
   created(){
-    this.$axios('/?afdfds').then(response=>{
-      console.log(response)
-    }).catch(error=>{
-      console.log(error)
-    })
+    
   }
 }
 </script>
