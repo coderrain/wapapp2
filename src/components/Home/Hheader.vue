@@ -59,6 +59,11 @@
             span{
                 padding-top:.4rem;
                 display: block;
+                a{
+                    color:#fff;
+                    display:block;
+                    margin-top:0.08rem;
+                }
             }
 
         }
@@ -76,10 +81,8 @@
             li{
                 font-size: .36rem;
                 color: #fff;
-                a{
-                    color: #fff;
-                }
             }
+
         }
     }
 </style>
