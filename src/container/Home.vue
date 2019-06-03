@@ -2,19 +2,19 @@
     <div>
         <h-header></h-header>
 		<div class="search">
-			<input type="" name="">
+			<input @focus="focusSearch" type="" name="">
 			<div class="hot">
 				<h3>热搜</h3>
-				<span>Air Jordan</span>
-				<span>Yeezy</span>
-				<span>华为</span>
-				<span>iphone</span>
+				<span v-for="item in hotSearchList">
+					<router-link :to="{path:'/search',query:{name: item.name}}">{{ item.name }}</router-link>
+				</span>
+
 			</div>
 
 		</div>
        	<div class="swiper">
-       	<div class="top"></div>
-		<img src="./../assets/image/2.png">
+			<div class="top"></div>
+			<img :src="banner">
        	</div>
         <Menu></Menu>
     </div>
@@ -28,7 +28,31 @@
         components: {
             'h-header': Hheader,
             'Menu':Menu
-        }
+        },
+		data(){
+        	return {
+				hotSearchList: [
+						{
+							name: 'Air Jordan'
+						},{
+							name: 'Yeezy'
+						},{
+							name: '华为'
+						},{
+							name: 'iphone'
+						}
+				],
+				banner: require( '../assets/image/2.png')
+			}
+		},
+		created(){
+
+		},
+		methods: {
+			focusSearch(){
+				this.$router.push('/search')
+			}
+		}
     }
 </script>
 

@@ -358,4 +358,10 @@ template {
 }
 body{
     font-size: .16rem;
+    max-width: 750px;
+    margin:0 auto;
+}
+
+input{
+    outline: none;
 }

@@ -8,6 +8,7 @@
     <title>wapapp</title>
     <script>
       var wW = document.documentElement.clientWidth || document.body.clientWidth;
+      wW = wW > 750? 750: wW;
       document.documentElement.style.fontSize = wW/(750/100) + 'px';
     </script>
   </head>

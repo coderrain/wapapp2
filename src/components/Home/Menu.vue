@@ -2,52 +2,10 @@
     <div class="menu">
       <div class="nav">
         <ul>
-            <li>
+            <li v-for="item in menuList">
                 <div>
-                    <img src="../../assets/image/3.png">
-                    <p>Air jordan</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/4.png">
-                    <p>Yeezy</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/5.png">
-                    <p>Nike</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/6.png">
-                    <p>Adidas</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/7.png">
-                    <p>Air jordan11</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/8.png">
-                    <p>Suprime</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/9.png">
-                    <p>Jersey</p>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <img src="../../assets/image/10.png">
-                    <p>全部</p>
+                    <img :src="item.url">
+                    <p>{{ item.title }}</p>
                 </div>
             </li>
         </ul>
@@ -71,7 +29,7 @@
         <ul>
             <li>
                 <div>
-                    <img src="../../assets/image/16.png">
+                    <img v-lazy="'http://e.hiphotos.baidu.com/image/h%3D300/sign=907f6e689ddda144c5096ab282b6d009/dc54564e9258d1092f7663c9db58ccbf6c814d30.jpg'">
                 </div>
                 <p>耐克 NIKE 男子 跑步鞋 FlEX EXPERIENCE RN8 运动鞋</p>
                 <span>￥419.00</span>
@@ -79,7 +37,7 @@
             </li>
             <li class="nv">
                 <div>
-                    <img src="../../assets/image/17.png">
+                    <img v-lazy="'http://f.hiphotos.baidu.com/image/h%3D300/sign=0c78105b888ba61ec0eece2f713597cc/0e2442a7d933c8956c0e8eeadb1373f08202002a.jpg'">
                 </div>
                 <p>耐克 NIKE 2019春夏新款 ZOOM PEGUSOS 35 RBO 女子运动跑步鞋</p>
                 <span>￥1569.00</span>
@@ -111,6 +69,11 @@
 
     export default {
         name: "Menu",
+        computed: {
+            menuList(){
+                return this.$store.state.home.list
+            }
+        }
     }
 </script>
 

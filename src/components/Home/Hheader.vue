@@ -37,6 +37,7 @@
     .h_header{
         height: .88rem;
         background: #51dfe1;
+        position: relative;
         h1{
             color: #fff;
             font-size: .38rem;
@@ -45,7 +46,7 @@
         }
         .ico_common{
             position: absolute;
-            width: .4rem;
+            width: .45rem;
             height: .58rem;
             top: .15rem;
             cursor: pointer;
