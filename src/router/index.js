@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Test from '../container/Test.vue'
+import Home from '../container/Home.vue'
+import Search from '../container/Search.vue'
 Vue.use(VueRouter)
+
 
 /*let Test = {
     template: `
@@ -9,8 +11,13 @@ Vue.use(VueRouter)
     `
 }*/
 const routes = [{
-    path: '/test',
-    component: Test
+    path: '/',
+    name: 'home',
+    component: Home
+},{
+    path: '/search',
+    name: 'search',
+    component: Search
 }]
 
 const router = new VueRouter({

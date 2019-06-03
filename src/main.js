@@ -3,6 +3,7 @@ import router from './router'
 import store from './store'
 import axios from './base/axios'
 import App from './App.vue'
+import './assets/css/mormalize.css'
 
 Vue.config.productionTip = false
 
