@@ -2,7 +2,7 @@
     <div>
         <h-header></h-header>
 		<div class="search">
-			<input @focus="focusSearch" type="" name="">
+			<input placeholder="           搜索页面" @focus="focusSearch" type="" name="">
 			<div class="hot">
 				<h3>热搜</h3>
 				<span v-for="item in hotSearchList">
@@ -61,6 +61,8 @@
 	height:1.55rem;
 	background:#51dfe0;
 	input{
+		background:#fff url('../assets/image/24.png') no-repeat 0.15rem;
+		background-size:5%;
 		margin-top:0.15rem;
 		margin-bottom:0.06rem;
 		height:0.6rem;
@@ -94,6 +96,9 @@
 			height:0.4rem;
 			line-height:0.4rem;
 		}
+		a{
+		 color:#fff;
+		}
 	}
 }
 .swiper{
@@ -105,6 +110,7 @@
 		border-radius:0rem 0rem 0.5rem 0.5rem;	
 	}
 	img{
+		z-index:10;
 		border-radius:0.06rem;
 		top:0;
 		position:absolute;

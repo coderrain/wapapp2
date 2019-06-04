@@ -7,11 +7,26 @@
         <div class="right ico_common" @click="menuShow"></div>
         <div class="menu" v-show="menuIsActive">
             <ul>
-                <li>我的</li>
-                <li>全部订单</li>
-                <li>购物车</li>
-                <li>我的消息</li>
-                <li><router-link :to="{path:'/search'}">跳转search</router-link></li>
+                <li>
+                    <img src="../../assets/image/18.png">
+                    <p>我的</p>
+                </li>
+                <li>
+                    <img src="../../assets/image/19.png">
+                    <p>全部订单</p>
+                </li>
+                <li>
+                    <img src="../../assets/image/20.png">
+                     <p>购物车</p>
+                </li>
+                <li>
+                    <img src="../../assets/image/21.png">
+                    <p>我的消息</p>
+                </li>
+                <li>
+                    <img src="../../assets/image/21.png">
+                    <p><router-link :to="{path:'/search'}">跳转search</router-link></p>
+                </li>
             </ul>
         </div>
     </div>
@@ -79,9 +94,31 @@
             width:3.2rem;
             background: #000;
             opacity: 0.8;
+            border-radius:0.08rem;
+            z-index:1000;
             li{
+                width:3.16rem;
+                height:1.08rem;
                 font-size: .36rem;
                 color: #fff;
+                p{
+                    margin-top:0.33rem;
+                    float:left;
+                    margin-left:0.38rem;
+                    border-bottom: 1px solid #ccc;
+                    padding-bottom:0.30rem;
+                    width:2rem;
+                }
+                img{
+                    float:left;
+                    margin-left:0.4rem;
+                    margin-top:0.33rem;
+                    width:0.38rem;
+                    height:0.48rem;
+                }
+                a{
+                    color:#ccc;
+                }
             }
 
         }

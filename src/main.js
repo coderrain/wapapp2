@@ -5,6 +5,7 @@ import axios from './base/axios'
 import App from './App.vue'
 import './assets/css/mormalize.css'
 import VueLazyLoad from 'vue-lazyload'
+Vue.use(VueLazyLoad)
 Vue.config.productionTip = false
 
 Vue.prototype.$axios = axios
@@ -13,7 +14,6 @@ Vue.use(VueLazyLoad,{
   error: '',
   loading: ''
 })
-console.log(1)
 
 new Vue({
   router, //注入router
