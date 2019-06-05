@@ -31,13 +31,19 @@
 	            </ul>
 	        </div>	
         </div>
+        <div class="collect">
+        	<h3>待收货</h3>
+        	<p>下单3-5天可收到货,</p>
+        	<p>请您耐心等待</p>
+        	<img src="../assets/image/46.png">
+        </div>
         <div class="name">
+        	<img src="../assets/image/47.png">
         	<p>王冉</p>
         	<span class="num">188****1699</span>
         	<span class="address">陕西省西安市长安区韦曲街道长安警苑三单元701室</span>
         	<span class="mup">></span>
         </div>
-        <img class="call" src="../assets/image/39.png">
         <div class="main">
         	<img src="../assets/image/40.png">
         	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
@@ -65,13 +71,25 @@
         		<span>￥2989.00</span>
         	</div>
         </div>
-        <div class="bk"></div>
+        <div class="plait">
+        	<ul>
+				<li>
+					<p>订单编号</p>
+					<span>12354658708kh</span>
+				</li>
+				<li>
+					<p>创建日期</p>
+					<span>2018-08-04 15:36</span>
+				</li>
+				<li>
+					<p>付款时间</p>
+					<span>2018-08-04 15:40</span>
+				</li>
+			</ul>
+        </div>
         <div class="foot">
-        	<div>
-        		<p>实付款:</p>
-        		<span>￥2989.00</span>
-        		<div>确认支付</div>
-        	</div>
+        	<div class="del">删除订单</div>
+        	<div class="by">再次购买</div>
         </div>
     </div>
 </template>
@@ -123,6 +141,31 @@
 		margin-right:0.3rem;
 	}
 }	
+.collect{
+	margin-top:0.2rem;
+	height:2.3rem;
+	width:100%;
+	color:#3ecdb9;
+	position:relative;
+	h3{
+		padding-top:0.66rem;
+		margin-left:0.42rem;
+		font-size:0.32rem;
+		padding-bottom:0.12rem;
+	}
+	p{
+		margin-left:0.42rem;
+		font-size:0.28rem;
+	}
+	img{
+		width:2.46rem;
+		height:1.53rem;
+		position:absolute;
+		top:0.4rem;
+		left:4.16rem;
+	}
+
+}
 .menu{
 	z-index:210;
 	margin-top:0.5rem;
@@ -160,25 +203,37 @@
 .name{
 	z-index:0;
 	height:1.28rem;
-	p{
+	img{
+		float:left;
+		width:0.27rem;
+		height:0.34rem;
+		margin-top:0.22rem;
+		margin-left:0.36rem;
+	}
+	p{	
+		font-weight:700;
 		font-size:0.26rem;
 		color:#262626;
 		padding-top:0.28rem;
-		margin-left:0.22rem;
+		margin-left:0.25rem;
 		float:left;
 		padding-right:0.24rem;
 	}
 	.num{
+		font-weight:700;
 		display:block;
 		font-size:0.26rem;
 		padding-top:0.28rem;
+		margin-left:5.2rem;
 	}
 	.address{
 		color:#6c6c6c;
 		display:block;
-		margin-left:0.24rem;
+		margin-left:0.9rem;
 		margin-top:0.18rem;
 		float:left;
+		font-size:0.28rem;
+		margin-right:0.6rem;
 	}
 	.mup{
 		font-size:0.36rem;
@@ -193,8 +248,8 @@
 	width:7.5rem;
 }
 .main{
-	margin-top:0.2rem;
-	margin-bottom:0.2rem;
+	margin-top:0.4rem;
+	margin-bottom:0.4rem;
 	height:2rem;
 	img{
 		width:2.0rem;
@@ -204,12 +259,12 @@
 		float:left;
 	}
 	.desert{
+		font-weight:700;
 		display:block;
-		font-size:0.22rem;
+		font-size:0.26rem;
 		margin-left:2.4rem;
 		margin-right:0.6rem;
 		padding-top:0.1rem;
-		font-weight:700;
 	}
 	div{
 		color:#666666;
@@ -252,6 +307,7 @@
 		margin-top:0.26rem;
 		span{
 			font-weight:700;
+			font-size:0.2rem;
 		}
 		p{
 			padding-bottom:0.05rem;
@@ -279,42 +335,65 @@
 		}
 	}
 }
-.bk{
-	height:5rem;
-	background:#f7f7f7;
+.plait{
+	overflow:hidden;
+	height:2.52rem;
+	width:100%;
+	ul{
+		height:1.78rem;
+		width:100%;
+		margin-top:0.26rem;
+		li{
+			float:left;
+			height:0.6rem;
+			p{
+				float:left;
+				font-size:0.28rem;
+				color:#595959;
+				margin-top:0.18rem;
+				margin-bottom:0.18rem;
+				margin-left:0.2rem;
+			}
+			span{
+				margin-left:0.6rem;
+				font-size:0.26rem;
+				color:#595959;
+				display:block;
+				float:left;
+				margin-top:0.22rem;
+			}
+		}
+	}
 }
 .foot{
-	margin-top:0.1rem;
-	height:1.12rem;
-	position: relative;
-	background:#fff;
-	div{
-		font-size:0.28rem;
-		p{
-			margin-top:0.42rem;
-			margin-left:0.22rem;
-			float:left;
-		}
-		span{
-			display:block;
-			color:#ff2e3f;
-			font-weight:700;
-			padding-top:0.42rem;
-		}
-		div{
-			position: absolute;
-			top:0.15rem;
-			left:5.02rem;
-			float:right;
-			width:2.2rem;
-			height:0.8rem;
-			background:#01bfbf;
-			border-radius:0.5rem;
-			text-align:center;
-			line-height:0.8rem;
-			color:#fff;
-			font-weight:700;
-		}
+	width:100%;
+	height:1.1rem;
+	position:relative;
+	.del{
+		position:absolute;
+		left:3.17rem;
+		top:0.18rem;
+		width:1.86rem;
+		height:0.8rem;
+		background:#f0f2f1;
+		color:#adafae;
+		border-radius:0.5rem;
+		text-align:center;
+		line-height:0.8rem;
+		font-size:0.3rem;
+	}
+	.by{
+		position:absolute;
+		left:5.44rem;
+		top:0.18rem;
+		width:1.86rem;
+		height:0.8rem;
+		background:#01bfbf;
+		color:#fff;
+		border-radius:0.5rem;
+		text-align:center;
+		line-height:0.8rem;
+		font-size:0.3rem;
 	}
 }
 </style>

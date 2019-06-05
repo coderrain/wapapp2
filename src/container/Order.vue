@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="all">
         <div class="head">
         	<div @click="back" class="back"><</div>
-        	<h3>确认订单</h3>
+        	<h3>订单</h3>
         	<div>
 				<img @click="menuShow" src="../assets/image/23.png">
         	</div>
@@ -31,14 +31,21 @@
 	            </ul>
 	        </div>	
         </div>
-        <div class="name">
-        	<p>王冉</p>
-        	<span class="num">188****1699</span>
-        	<span class="address">陕西省西安市长安区韦曲街道长安警苑三单元701室</span>
-        	<span class="mup">></span>
+        <div class="nav">
+        	<ul>
+				<li class="col">全部订单</li>
+				<li>待付款</li>
+				<li>待收货</li>
+				<li>已完成</li>
+			</ul>
         </div>
-        <img class="call" src="../assets/image/39.png">
+        <div class="num">
+	        	<span>订单编号：90128598276</span>
+	        	<img src="../assets/image/43.png">
+	        	<p>待收货</p>
+        </div>
         <div class="main">
+        	<div class="shoping">
         	<img src="../assets/image/40.png">
         	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
         	<div>
@@ -50,28 +57,48 @@
         		2989.00
         		<strong>x1</strong>
         	</p>
-        	
-        </div>
-        <div class="type">
-        	<h3>配送方式</h3>
-        	<div>
-        		<p>快递</p>
-        		运费<span>￥0.00</span>
+        	</div>
+        	<div class="show">
+        		<p>共一件商品 实付款</p>
+        		<span><i>￥</i>2989.00</span>
+        		<ul>
+					<li>删除订单</li>
+					<li class="ok">确认订单</li>
+				</ul>
         	</div>
         </div>
-        <div class="add">
-        	<h3>合计支付</h3>
+        <div class="num">
+	        <span>订单编号：90128598276</span>
+	        <img src="../assets/image/44.png">
+	        <p class="over">已完成</p>
+        </div>
+        <div class="main">
+        	<div class="shoping">
+        	<img src="../assets/image/40.png">
+        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
         	<div>
-        		<span>￥2989.00</span>
+				<span>图片色  </span>
+				<span> 38</span>
+        	</div>
+        	<p>
+        		<span>￥</span>
+        		2989.00
+        		<strong>x1</strong>
+        	</p>
+        	</div>
+        	<div class="show">
+        		<p>共一件商品 实付款</p>
+        		<span><i>￥</i>2989.00</span>
+        		<ul>
+					<li>删除订单</li>
+					<li class="ok">确认订单</li>
+				</ul>
         	</div>
         </div>
-        <div class="bk"></div>
-        <div class="foot">
-        	<div>
-        		<p>实付款:</p>
-        		<span>￥2989.00</span>
-        		<div>确认支付</div>
-        	</div>
+        <div class="num">
+	        <span>订单编号：90128598276</span>
+	        <img src="../assets/image/45.png">
+	        <p class="date">代付款</p>
         </div>
     </div>
 </template>
@@ -96,6 +123,9 @@
 </script>
 
 <style scoped lang="less">
+.all{
+	background:#f7f7f7;
+}
 .head{
 	overflow:hidden;
 	position: relative;
@@ -157,45 +187,68 @@
            }
         }
     }
-.name{
-	z-index:0;
-	height:1.28rem;
-	p{
-		font-size:0.26rem;
-		color:#262626;
-		padding-top:0.28rem;
-		margin-left:0.22rem;
+
+.nav{
+	height:0.88rem;
+	margin-top:0.26rem;
+	ul{
+		display: flex;
+		margin-left:0.37rem;
+	}
+	li{
 		float:left;
-		padding-right:0.24rem;
+		flex:1;
+		line-height:0.88rem;
+		font-size:0.28rem;
 	}
-	.num{
-		display:block;
-		font-size:0.26rem;
-		padding-top:0.28rem;
+	.col{
+		color:#00c0c2;
 	}
-	.address{
-		color:#6c6c6c;
-		display:block;
-		margin-left:0.24rem;
-		margin-top:0.18rem;
-		float:left;
-	}
-	.mup{
-		font-size:0.36rem;
-		float:right;
-		margin-right:0.2rem;
-		color:#bcbcbc;
-	}
+
 }
-.call{
-	z-index:0;
-	height:0.1rem;
-	width:7.5rem;
+.num{	
+	background:#fff;
+	height:0.88rem;
+	margin-top:0.18rem;
+	span{
+		float:left;
+		display:block;
+		font-size:0.3rem;
+		color:#d5d5d5;
+		margin-left:0.4rem;
+		padding-top:0.3rem;
+	}
+	img{
+		margin-top:0.3rem;
+		margin-left:2.2rem;
+		float:left;
+		width:0.35rem;
+		height:0.37rem;
+	}
+	P{
+		float:left;
+		margin-left:0.08rem;
+		margin-top:0.33rem;
+		color:#ffb2b8;
+		font-size:0.26rem;
+	}
+	.over{
+		color:#70d9b0;
+	}
+	.date{
+		color:#ff912d;
+	}
 }
 .main{
+	.shoping{
+		height:2rem;
+		padding:0;
+		margin:0;
+		margin-top:0.22rem;
+	}
 	margin-top:0.2rem;
 	margin-bottom:0.2rem;
-	height:2rem;
+	height:3.67rem;
 	img{
 		width:2.0rem;
 		height:1.98rem;
@@ -209,7 +262,6 @@
 		margin-left:2.4rem;
 		margin-right:0.6rem;
 		padding-top:0.1rem;
-		font-weight:700;
 	}
 	div{
 		color:#666666;
@@ -232,89 +284,50 @@
 			color:#5f5f5f;
 		}
 	}
-
-}
-.type{
-	margin-top:0.2rem;
-	height:1.12rem;
-	h3{
-		line-height:1.12rem;
-		height:1.12rem;
-		float:left;
-		margin-left:0.2rem;
-		color:#6f6f6f;
-		font-size:0.26rem;
-		
-	}
-	div{
-		margin-right:0.3rem;
-		float:right;
-		margin-top:0.26rem;
-		span{
-			font-weight:700;
-		}
+	.show{
+		margin:0;
+		height:1.68rem;
+		padding:0;
 		p{
-			padding-bottom:0.05rem;
-			margin-left:0.6rem;
-		}
-	}
-
-}
-.add{
-	margin-top:0.2rem;
-	height:1.12rem;
-	h3{
-		line-height:1.12rem;
-		height:1.12rem;
-		float:left;
-		margin-left:0.2rem;
-		color:#6f6f6f;
-		font-size:0.26rem;
-	}
-	div{
-		margin-left:6.25rem;
-		padding-top:0.42rem;
-		span{
-			font-weight:700;
-		}
-	}
-}
-.bk{
-	height:5rem;
-	background:#f7f7f7;
-}
-.foot{
-	margin-top:0.1rem;
-	height:1.12rem;
-	position: relative;
-	background:#fff;
-	div{
-		font-size:0.28rem;
-		p{
-			margin-top:0.42rem;
-			margin-left:0.22rem;
-			float:left;
+			font-size:0.28rem;
+			color:#cecece;
+			margin-left:3.22rem;
+			margin-top:0.18rem;
 		}
 		span{
 			display:block;
-			color:#ff2e3f;
+			padding-top:0.18rem;
+			color:black;
 			font-weight:700;
-			padding-top:0.42rem;
+			font-size:0.28rem;
+			margin-left:5.66rem;
+			i{
+				font-style:none;
+				font-size:0.24rem;
+			}
 		}
-		div{
-			position: absolute;
-			top:0.15rem;
-			left:5.02rem;
-			float:right;
-			width:2.2rem;
-			height:0.8rem;
-			background:#01bfbf;
+		ul{
+			margin-left:4.05rem;
+			margin-top:0.42rem;
+		}
+		li{
+			width:1.45rem;
+			height:0.6rem;
 			border-radius:0.5rem;
+			background:#d9dada;
+			float:left;
+			margin-right:0.2rem;
 			text-align:center;
-			line-height:0.8rem;
+			line-height:0.6rem;
+			font-size:0.28rem;
+			color:#9d9f9e;
+		}
+		.ok{
+			background:#01bfbf;
 			color:#fff;
-			font-weight:700;
 		}
 	}
+
 }
+
 </style>

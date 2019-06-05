@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="head">
-        	<div class="back"><</div>
+        	<div @click="back" class="back"><</div>
         	<h3>搜索</h3>
         	<div>
 				<img @click="menuShow" src="../assets/image/23.png">
@@ -10,15 +10,15 @@
 	            <ul>
 	                <li>
 	                    <img src="../assets/image/18.png">
-	                    <p>我的</p>
+	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/19.png">
-	                    <p>全部订单</p>
+	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/20.png">
-	                     <p>购物车</p>
+	                    <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/21.png">
@@ -47,9 +47,6 @@
 			<li>Yeezy</li>
 			<li>Air jordan</li>
 			<li>阿迪达斯Adidas</li>
-			<li>Yeezy</li>
-			<li>Air jordan</li>
-			<li>阿迪达斯Adidas</li>
         </div>
     </div>
 </template>
@@ -65,6 +62,9 @@
         methods: {
             menuShow(){
                 this.menuIsActive = !this.menuIsActive
+            },
+            back(){
+            	history.back()
             }
         }
     }
@@ -124,6 +124,7 @@
 		height:0.6rem;
 		background:#f6f8f7;
 		width:5rem;
+		margin-left:0.08rem;
 	}
 	button{
 		font-size:0.24rem;
@@ -131,17 +132,20 @@
 		height:0.6rem;
 		background:#09c7c7;
 		border:0;
-		border-radius:0.15rem;
+		border-radius:0.1rem;
 		margin-left:0.15rem;
+		color:#fff;
 	}
 }
 .hot{
+	margin-left:0.28rem;
 	margin-top:0.28rem;
 	margin-bottom:0.2rem;
 	font-size:0.24rem;
 }
 .list{
 	li{
+		margin-right:0.2rem;
 		padding-right:0.2rem;
 		padding-left:0.2rem;
 		margin-left:0.2rem;

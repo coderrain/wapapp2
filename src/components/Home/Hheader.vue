@@ -1,7 +1,7 @@
 <template>
     <div class="h_header">
         <div class="left ico_common">
-            <span><router-link :to="{path:'/search'}">分类</router-link></span>
+            <span><router-link :to="{path:'/fication'}">分类</router-link></span>
         </div>
         <h1>优鞋库</h1>
         <div class="right ico_common" @click="menuShow"></div>
@@ -9,15 +9,15 @@
             <ul>
                 <li>
                     <img src="../../assets/image/18.png">
-                    <p>我的</p>
+                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
                 </li>
                 <li>
                     <img src="../../assets/image/19.png">
-                    <p>全部订单</p>
+                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
                 </li>
                 <li>
                     <img src="../../assets/image/20.png">
-                     <p>购物车</p>
+                     <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
                 </li>
                 <li>
                     <img src="../../assets/image/21.png">
