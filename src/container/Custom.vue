@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="head">
-        	<div class="back"><</div>
-        	<h3>搜索</h3>
+        	<div @click="back" class="back"><</div>
+        	<h3>商品详情</h3>
         	<div>
 				<img @click="menuShow" src="../assets/image/23.png">
         	</div>
@@ -10,15 +10,15 @@
 	            <ul>
 	                <li>
 	                    <img src="../assets/image/18.png">
-	                    <p>我的</p>
+	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/19.png">
-	                    <p>全部订单</p>
+	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/20.png">
-	                     <p>购物车</p>
+	                    <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/21.png">
@@ -52,7 +52,7 @@
 					<li>38</li>
 					<li>39</li>
 					<li>40</li>
-					<li>41</li>
+					<li class="four">41</li>
 					<li>42</li>
 					<li>43</li>
 				</ul>
@@ -60,13 +60,13 @@
         	<h3>颜色</h3>
         	<div class="col">
         		<div>图片色</div>
-        		<div>棕色</div>
+        		<div class="zong">棕色</div>
         	</div>
         	<h3>数量</h3>
         	<div class="count">
-        		<div>-</div>
+        		<div class="jup">-</div>
         		<span>1</span>
-        		<div>+</div>
+        		<div class="add">+</div>
         	</div>
         	<div class="foot">
         		<div class="car">加入购物车</div>
@@ -88,6 +88,9 @@
         methods: {
             menuShow(){
                 this.menuIsActive = !this.menuIsActive
+            },
+            back(){
+            	history.back()
             }
         }
     }
@@ -191,7 +194,6 @@
 }
 .main{
 	border-radius:0.3rem 0.3rem 0 0 ;
-	border: 0.4px solid #7f7f7f;
 	.show{
 		position: relative;
 		height:2.15rem;
@@ -225,6 +227,7 @@
 			}
 		}
 		button{
+			font-size:0.24rem;
 			float:right;
 			width:0.44rem;
 			height:0.44rem;
@@ -253,11 +256,19 @@
 			line-height:0.6rem;
 			margin: 0.2rem 0.2rem;
 		}
+		.four{
+			background:#01bfbf;
+			color:#fff;
+		}
 	}
 	.col{
 		overflow:hidden;
 		margin-left:-0.18rem;
 		height:1rem;
+		.zong{
+			background:#01bfbf;
+			color:#fff;
+		}
 		div{
 			width:1.24rem;
 			height:0.6rem;
@@ -268,7 +279,7 @@
 			margin-top:0.15rem;
 			margin-bottom:0.26rem;
 			margin-left:0.38rem;
-			border-radius:0.2rem;
+			border-radius:0.1rem;
 			color:black;
 		}
 	}
@@ -283,22 +294,26 @@
 			font-size:0.34rem;
 		}
 		div{
+			color:#0cbaa3;
 			width:0.44rem;
 			height:0.44rem;
 			background:#d2f2f1;
-			font-size:0.36rem;	
+			font-size:0.5rem;	
 			border-radius:50%;
 			text-align:center;
-			line-height:0.44rem;
+			line-height:0.4rem;
 			float:left;
+		}
+		.add{
+			background:#01bfbf;
+			color:#fff;
 		}
 	}
 	.foot{
 		height:0.8rem;
 		margin-top:0.55rem;
 		width:6.52rem;
-		margin:0 auto;
-		margin-bottom:0.8rem;
+		margin-left:0.45rem;
 		div{
 			font-size:0.28rem;
 			width:3.26rem;

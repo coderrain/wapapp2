@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="head">
-        	<div class="back"><</div>
-        	<h3>搜索</h3>
+        	<div @click="back" class="back"><</div>
+        	<h3>分类列表</h3>
         	<div>
 				<img @click="menuShow" src="../assets/image/23.png">
         	</div>
@@ -10,15 +10,15 @@
 	            <ul>
 	                <li>
 	                    <img src="../assets/image/18.png">
-	                    <p>我的</p>
+	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/19.png">
-	                    <p>全部订单</p>
+	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/20.png">
-	                     <p>购物车</p>
+	                     <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/21.png">
@@ -77,6 +77,9 @@
         methods: {
             menuShow(){
                 this.menuIsActive = !this.menuIsActive
+            },
+            back(){
+            	history.back()
             }
         } 
     }
@@ -95,6 +98,9 @@
 		line-height:0.36rem;
 		margin-left:0.28rem;
 		font-weight:700;
+	}
+	p{
+		color:#fff;
 	}
 	h3{
 		text-align: center;
@@ -118,8 +124,8 @@
         text-align: center;
     }
 	input{
-		background:#f6f7f8 url('../assets/image/24.png') no-repeat 2.2rem;
-		background-size:0.4rem 0.3rem;
+		background:#f6f7f8 url('../assets/image/24.png') no-repeat 2.1rem;
+		background-size:0.4rem 0.4rem;
 		margin-left:0.6rem;
 		border-radius:0.3rem;
 		float:left;
@@ -178,7 +184,7 @@
  		width:1.85rem;
  		li{
  			width:1.85rem;
- 			height:.9rem;
+ 			height:1rem;
  			background:#eff3f2;
  			font-size:0.35rem;
  			text-align:center;

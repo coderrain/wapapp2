@@ -1,8 +1,8 @@
 <template>
-    <div>
+    <div class="all">
         <div class="head">
         	<div @click="back" class="back"><</div>
-        	<h3>确认订单</h3>
+        	<h3>购物车</h3>
         	<div>
 				<img @click="menuShow" src="../assets/image/23.png">
         	</div>
@@ -18,7 +18,7 @@
 	                </li>
 	                <li>
 	                    <img src="../assets/image/20.png">
-	                    <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
+	                     <p>购物车</p>
 	                </li>
 	                <li>
 	                    <img src="../assets/image/21.png">
@@ -31,14 +31,9 @@
 	            </ul>
 	        </div>	
         </div>
-        <div class="name">
-        	<p>王冉</p>
-        	<span class="num">188****1699</span>
-        	<span class="address">陕西省西安市长安区韦曲街道长安警苑三单元701室</span>
-        	<span class="mup">></span>
-        </div>
-        <img class="call" src="../assets/image/39.png">
         <div class="main">
+        	<div class="shoping">
+        	<input type="checkbox" name="">
         	<img src="../assets/image/40.png">
         	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
         	<div>
@@ -48,31 +43,41 @@
         	<p>
         		<span>￥</span>
         		2989.00
-        		<strong>x1</strong>
+        		<span class="jum">-</span>
+        		<span class="num">1</span>
+        		<span class="add">+</span>
         	</p>
-        	
-        </div>
-        <div class="type">
-        	<h3>配送方式</h3>
-        	<div>
-        		<p>快递</p>
-        		运费<span>￥0.00</span>
         	</div>
         </div>
-        <div class="add">
-        	<h3>合计支付</h3>
+        <div class="main">
+        	<div class="shoping">
+        	<input type="checkbox" name="" style="border-radius:50%;">       	
+        	<img src="../assets/image/40.png">
+        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
         	<div>
-        		<span>￥2989.00</span>
+				<span>图片色  </span>
+				<span> 38</span>
+        	</div>
+        	<p>
+        		<span>￥</span>
+        		2989.00
+        		<span class="jum">-</span>
+        		<span class="num">1</span>
+        		<span class="add">+</span>
+        	</p>
         	</div>
         </div>
-        <div class="bk"></div>
         <div class="foot">
-        	<div>
-        		<p>实付款:</p>
-        		<span>￥2989.00</span>
-        		<div>确认支付</div>
+        	<div class="election">
+				<input type="checkbox" name="">
+				全选
         	</div>
-        </div>
+        	<div class="together">
+        		<p>共一件:</p>
+        		<span><i>￥</i>2989.00</span>
+        		<div>去结账</div>
+        	</div>
+       	</div>
     </div>
 </template>
 
@@ -157,163 +162,155 @@
            }
         }
     }
-.name{
-	z-index:0;
-	height:1.28rem;
-	p{
-		font-size:0.26rem;
-		color:#262626;
-		padding-top:0.28rem;
-		margin-left:0.22rem;
-		float:left;
-		padding-right:0.24rem;
-	}
-	.num{
-		display:block;
-		font-size:0.26rem;
-		padding-top:0.28rem;
-	}
-	.address{
-		color:#6c6c6c;
-		display:block;
-		margin-left:0.24rem;
-		margin-top:0.18rem;
-		float:left;
-	}
-	.mup{
-		font-size:0.36rem;
-		float:right;
-		margin-right:0.2rem;
-		color:#bcbcbc;
-	}
-}
-.call{
-	z-index:0;
-	height:0.1rem;
-	width:7.5rem;
-}
 .main{
-	margin-top:0.2rem;
+	.shoping{
+		position:relative;
+		height:2rem;
+		padding:0;
+		margin:0;
+		margin-top:0.22rem;
+	}
+	margin-top:0.5rem;
 	margin-bottom:0.2rem;
-	height:2rem;
 	img{
 		width:2.0rem;
 		height:1.98rem;
 		border-radius:0.1rem;
-		margin-left:0.2rem;
 		float:left;
 	}
 	.desert{
 		display:block;
-		font-size:0.22rem;
-		margin-left:2.4rem;
+		font-weight:700;
+		font-size:0.24rem;
+		margin-left:3.44rem;
 		margin-right:0.6rem;
 		padding-top:0.1rem;
-		font-weight:700;
 	}
 	div{
 		color:#666666;
 		margin-top:0.35rem;
-		padding-left:2.42rem;
+		padding-left:3.44rem;
+		font-size:0.26rem;
 	}
 	p{
 		float:left;
-		clolr:#252525;
-		font-size:0.2rem;
-		margin-left:0.2rem;
+		color:#ed3a40;
+		font-size:0.3rem;
+		margin-left:0.3rem;
 		margin-top:0.2rem;
 		font-weight:700;
-		span{
-			font-size:0.16rem;
+		.jum{
+			position:absolute;
+			display:block;
+			width:0.4rem;
+			height:0.4rem;
+			background:#d2f2f1;
+			color:#00bcc7;
+			border-radius:50%;
+			float:left;
+			text-align:center;
+			line-height:0.4rem;
+			font-size:0.24rem;
+			top:1.43rem;
+			left:5.8rem;
 		}
-		strong{
-			font-weight:400;
-			margin-left:3.34rem;
-			color:#5f5f5f;
+		.add{
+			position:absolute;
+			top:1.43rem;
+			left:6.7rem;
+			font-size:0.24rem;
+			line-height:0.4rem;
+			text-align:center;
+			border-radius:50%;
+			display:block;
+			width:0.4rem;
+			height:0.4rem;
+			background:#00bcc7;
+			float:left;
+			color:#fff;
 		}
-	}
-
-}
-.type{
-	margin-top:0.2rem;
-	height:1.12rem;
-	h3{
-		line-height:1.12rem;
-		height:1.12rem;
-		float:left;
-		margin-left:0.2rem;
-		color:#6f6f6f;
-		font-size:0.26rem;
-		
-	}
-	div{
-		margin-right:0.3rem;
-		float:right;
-		margin-top:0.26rem;
-		span{
-			font-weight:700;
-		}
-		p{
-			padding-bottom:0.05rem;
-			margin-left:0.6rem;
-		}
-	}
-
-}
-.add{
-	margin-top:0.2rem;
-	height:1.12rem;
-	h3{
-		line-height:1.12rem;
-		height:1.12rem;
-		float:left;
-		margin-left:0.2rem;
-		color:#6f6f6f;
-		font-size:0.26rem;
-	}
-	div{
-		margin-left:6.25rem;
-		padding-top:0.42rem;
 		span{
 			font-weight:700;
+			font-size:0.24rem;
+			color:#ed3a40;
+		}
+		.num{
+			margin-left:1.35rem;
+			font-size:0.35rem;
+			color:black;
+			margin-bottom:0.1rem;
+
 		}
 	}
-}
-.bk{
-	height:5rem;
-	background:#f7f7f7;
+	input{
+		margin:0;
+		padding:0;
+		width:0.4rem;
+		height:0.4rem;
+		border-radius:0.5rem;
+		float:left;
+		border:1px solid black;
+		margin-left:0.42rem;
+		margin-right:0.22rem;
+		margin-top:0.8rem;
+	}
 }
 .foot{
-	margin-top:0.1rem;
-	height:1.12rem;
-	position: relative;
-	background:#fff;
-	div{
-		font-size:0.28rem;
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	height:1.1rem;
+	.election{
+		float:left;
+		color:#888888;
+		font-size:0.24rem;
+		width:0.5rem;
+		height:1.1rem;
+		margin-left:0.2rem;
+		input{
+			width:0.4rem;
+			height:0.4rem;
+			border-radius:50%;
+			margin-left:0.05rem;
+			margin-top:0.24rem;
+			margin-bottom:0.1rem;
+		}
+	}
+	.together{
+		float:left;
+		margin-left:2.2rem;
+		width:4.6rem;
+		height:1.1rem;
 		p{
 			margin-top:0.42rem;
-			margin-left:0.22rem;
+			color:#666666;
+			font-size:0.28rem;
 			float:left;
 		}
 		span{
 			display:block;
-			color:#ff2e3f;
-			font-weight:700;
-			padding-top:0.42rem;
+			float:left;
+			margin-top:0.4rem;
+			font-size:0.3rem;
+			color:#ee303a;
+			i{
+				font-style:none;
+				font-size:0.26rem;
+			}
 		}
 		div{
-			position: absolute;
-			top:0.15rem;
-			left:5.02rem;
-			float:right;
-			width:2.2rem;
+			float:left;
+			width:1.82rem;
 			height:0.8rem;
 			background:#01bfbf;
+			color:#fff;
 			border-radius:0.5rem;
 			text-align:center;
 			line-height:0.8rem;
-			color:#fff;
-			font-weight:700;
+			margin-top:0.15rem;
+			margin-left:0.22rem;
+			font-size:0.24rem;
 		}
 	}
 }
