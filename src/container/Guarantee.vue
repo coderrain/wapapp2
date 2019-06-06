@@ -1,36 +1,6 @@
 <template>
     <div id="all">
-        <div class="head">
-        	<div @click="back" class="back"><</div>
-        	<h3>商品详情</h3>
-        	<div>
-				<img @click="menuShow" src="../assets/image/23.png">
-        	</div>
-        	<div class="menu" v-show="menuIsActive">
-	            <ul>
-	                <li>
-	                    <img src="../assets/image/18.png">
-	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/19.png">
-	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/20.png">
-	                     <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p>我的消息</p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p><router-link :to="{path:'/search'}">跳转search</router-link></p>
-	                </li>
-	            </ul>
-	        </div>	
-        </div>
+        <top></top>
         <div class="logo">
         	<img src="../assets/image/42.png">
         	<ul>
@@ -131,6 +101,9 @@
         padding-bottom:0.30rem;
         width:2rem;
         }
+        .bor{
+        	border:0;
+        }
         img{
            float:left;
            margin-left:0.1rem;
@@ -222,5 +195,7 @@
 		margin-left:0.46rem;
 	}
 }
-
+a{
+	color:#fff;
+}
 </style>

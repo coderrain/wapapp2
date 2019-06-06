@@ -119,4 +119,7 @@
 		margin-left:0.2rem;
 	}
 }
+a{
+	color:#fff;
+}
 </style>

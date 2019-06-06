@@ -25,7 +25,7 @@
                 </li>
                 <li>
                     <img src="../../assets/image/21.png">
-                    <p><router-link :to="{path:'/search'}">跳转search</router-link></p>
+                    <p class="bor"><router-link :to="{path:'/search'}">跳转search</router-link></p>
                 </li>
             </ul>
         </div>
@@ -108,6 +108,9 @@
                     border-bottom: 1px solid #ccc;
                     padding-bottom:0.30rem;
                     width:2rem;
+                }
+                .bor{
+                    border:0;
                 }
                 img{
                     float:left;

@@ -75,6 +75,7 @@ pre {
 
 a {
     background-color: transparent;
+    color:#fff;
 }
 
 /**
@@ -95,6 +96,9 @@ abbr[title] {
 b,
 strong {
     font-weight: bolder;
+}
+a{
+    color:#fff;
 }
 
 /**
