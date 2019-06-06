@@ -51,6 +51,7 @@
 
 <style scoped lang="less">
 .head{
+    z-index:100;
     margin-top:0.3rem;
     position: relative;
     width:100%;
