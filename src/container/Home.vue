@@ -34,37 +34,15 @@
         </div>
         <div class="list">
             <ul>
-                <li>
-                    <div>
-                        <img v-lazy="'http://e.hiphotos.baidu.com/image/h%3D300/sign=907f6e689ddda144c5096ab282b6d009/dc54564e9258d1092f7663c9db58ccbf6c814d30.jpg'">
-                    </div>
-                    <p>耐克 NIKE 男子 跑步鞋 FlEX EXPERIENCE RN8 运动鞋</p>
-                    <span>￥419.00</span>
-                    <span class="people">274人付款</span>
-                </li>
-                <li class="nv">
-                    <div>
-                        <img v-lazy="'http://f.hiphotos.baidu.com/image/h%3D300/sign=0c78105b888ba61ec0eece2f713597cc/0e2442a7d933c8956c0e8eeadb1373f08202002a.jpg'">
-                    </div>
-                    <p>耐克 NIKE 2019春夏新款 ZOOM PEGUSOS 35 RBO 女子运动跑步鞋</p>
-                    <span>￥1569.00</span>
-                    <span class="people">274人付款</span>
-                </li>
-                <li>
-                    <div>
-                        <img src="../assets/image/16.png">
-                    </div>
-                    <p>耐克 NIKE 2019春夏新款 ZOOM PEGUSOS 35 RBO 女子运动跑步鞋</p>
-                    <span>￥419.00</span>
-                    <span class="people">274人付款</span>
-                </li>
-                <li class="nv">
-                    <div>
-                        <img src="../assets/image/17.png">
-                    </div>
-                    <p>耐克 NIKE 2019春夏新款 ZOOM PEGUSOS 35 RBO 女子运动跑步鞋</p>
-                    <span>￥1569.00</span>
-                    <span class="people">274人付款</span>
+                <li v-for="item in shopList">
+                    <router-link :to="{name:'part',params:{id:item.id}}">
+                        <div>
+                            <img v-lazy="item.url">
+                        </div>
+                        <p>{{ item.title }}</p>
+                        <span>￥{{item.price}}</span>
+                        <span class="people">{{item.costed}}人付款</span>
+                    </router-link>
                 </li>
             </ul>
 
@@ -75,7 +53,7 @@
 <script>
     import Hheader from '../components/Home/Hheader.vue'
     import Menu from '../components/Home/Menu.vue'
-    import { hotSearchListFn } from "../api/index";
+    //import { hotSearchListFn } from "../api/index";
 
     export default {
         name: "Home",
@@ -86,13 +64,23 @@
 		data(){
         	return {
 				hotSearchList: [],
-				banner: require( '../assets/image/2.png')
+				banner: '',
+                shopList:[]
 			}
 		},
 		created(){
-            hotSearchListFn().then(res=>{
+            /*hotSearchListFn().then(res=>{
                 let { data } = res;
                 this.hotSearchList = data.list
+            })*/
+            ///api/shopList?key=chose&val=1
+            this.$axios.get('/api/shopList',{
+                params:{
+                    key:'chose',
+                    val:1
+                }
+            }).then(data=>{
+                this.shopList = data.data.data;
             })
 		},
 		methods: {
@@ -256,4 +244,5 @@
         }
     }
 }
+
 </style>

@@ -7,17 +7,21 @@
         <div class="chon">
         	<div class="name">
         		<img src="../assets/image/60.png">
-        		<input type="" name="" placeholder="请输入账号">
+        		<input type="" name="" placeholder="请输入手机号码">
         	</div>
         	<div class="pass">
         		<img src="../assets/image/61.png">
-        		<input type="" name="" placeholder="请输入密码">
+        		<input type="" name="" placeholder="请设置密码">
         		<span>忘记密码</span>
         	</div>
-        	<div class="ok">登录</div>
+        	<div class="pass">
+        		<img src="../assets/image/62.png">
+        		<input type="" name="" placeholder="请输入验证码">
+        		<span class="get">获取验证码</span>
+        	</div>
+        	<div class="ok">注册</div>
         	<div class="Short">
-        		<span>短信验证登录</span>
-        		<span class="right">注册</span>
+        		<span class="right">登陆</span>
         	</div>
         </div>
     </div>
@@ -111,6 +115,9 @@
 			float:right;
 			margin-top:0.3rem;
 			margin-right:0.16rem;
+		}
+		.get{
+			color:#6edcdb;
 		}
 	}
 	input::-webkit-input-placeholder{

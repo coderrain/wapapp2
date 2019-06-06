@@ -1,38 +1,8 @@
 <template>
     <div>
-        <div class="head">
-        	<div @click="back" class="back"><</div>
-        	<h3>商品详情</h3>
-        	<div>
-				<img @click="menuShow" src="../assets/image/23.png">
-        	</div>
-        	<div class="menu" v-show="menuIsActive">
-	            <ul>
-	                <li>
-	                    <img src="../assets/image/18.png">
-	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/19.png">
-	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/20.png">
-	                    <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p>我的消息</p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p><router-link :to="{path:'/search'}">跳转search</router-link></p>
-	                </li>
-	            </ul>
-	        </div>	
-        </div>
+        <top></top>
         <div class="logo">
-        	<img src="../assets/image/35.png">
+        	<img :src="shopInfo.url">
         	<ul>
         		<li></li>
 				<li></li>
@@ -41,20 +11,20 @@
         	</ul>
         </div>
         <div class="choice">
-        	<h3> Off - White X Nike Air Max 90  THE  TEN 联名沙漠</h3>
-        	<span class="money"><span>￥</span>2989.00</span>
-        	<span class="people">274人付款</span>
+        	<h3> {{shopInfo.title}}</h3>
+        	<span class="money"><span>￥</span>{{shopInfo.price}}</span>
+        	<span class="people">{{shopInfo.costed}}人付款</span>
         	<div class="size">
 	        	<span class="cho">选择</span>
 				<span class="col">选择颜色分类    尺码</span>
 				<span class="jump">></span>
         	</div>
-        	<div class="size">
+        	<div class="size" @click="showDigeo">
 	        	<span class="cho">保障</span>
 				<span class="col">质量保障·正品保证·多重鉴定·售后保障</span>
 				<span class="jump">></span>
         	</div>
-        	<div class="size">
+        	<div class="size" @click="showDigeo">
 	        	<span class="cho">参数</span>
 				<span class="col">品牌 闭合方式...</span>
 				<span class="jump">></span>
@@ -64,7 +34,7 @@
         	<h3>
         	————	商品详情   ————
         	</h3>
-        	<img src="../assets/image/34.png">
+        	<img :src="shopInfo.url">
         </div>
         <div class="foot">
         	<div class="shop">
@@ -76,89 +46,56 @@
         	<span class="quite">立即购买</span>
         	</div>
         </div>
-
+		<Guarantee
+				v-show="isShow"
+				v-on:showdigeo="showDigeo"
+				:safe="shopInfo.safe"></Guarantee>
+		<Parameter
+			v-show="isShow"
+			v-on:showdigeo="showDigeo"
+			:rest="shopInfo.rest">
+		</Parameter>
     </div>
 </template>
 
 <script>
+	import Top from '../components/common/Top.vue'
+	import Guarantee from './Guarantee.vue'
+	import Parameter from './Parameter.vue'
     export default {
-        name: "Search",
+        name: "Part",
+        components:{
+        	'top':Top,
+			Guarantee,
+			Parameter
+        },
+		created(){
+        	//console.log(this.$route.params)
+        	let id = this.$route.params.id;
+			this.$axios.get('/api/shopList',{
+				params:{
+					key:'id',
+					val: id
+				}
+			}).then(data=>{
+				this.shopInfo = data.data.data[0]
+			})
+		},
+		methods:{
+			showDigeo(){
+				this.isShow = !this.isShow;
+			}
+		},
         data(){
             return {
-                menuIsActive: false
-            }
-        },
-        methods:{
-            menuShow(){
-                this.menuIsActive = !this.menuIsActive
-            },
-            back(){
-            	history.back()
+				shopInfo:{},
+				isShow:false
             }
         }
     }
 </script>
 
 <style scoped lang="less">
-.head{
-	position: relative;
-	margin-top:0.3rem;
-	width:100%;
-	height:0.35rem;
-	.back{
-		font-size:0.36rem;
-		color:black;
-		float:left;
-		line-height:0.36rem;
-		margin-left:0.28rem;
-		font-weight:700;
-	}
-	h3{
-		text-align: center;
-		margin-left:2.9rem;
-		font-size:0.32rem;
-		float:left;
-	}
-	img{
-		width:0.42rem;
-		height:0.39rem;
-		float:right;
-		margin-right:0.3rem;
-	}
-}		
-.menu{
-	margin-top:0.5rem;
-    position: absolute;
-    right: .28rem;
-    width:3.2rem;
-    background: #000;
-    opacity: 0.8;
-    border-radius:0.08rem;
-    li{
-       width:3.16rem;
-       height:1.08rem;
-       font-size: .36rem;
-       color: #fff;
-       p{
-        margin-top:0.33rem;
-        float:left;
-        margin-left:0.38rem;
-        border-bottom: 1px solid #ccc;
-        padding-bottom:0.30rem;
-        width:2rem;
-        }
-        img{
-           float:left;
-           margin-left:0.1rem;
-           margin-top:0.33rem;
-           width:0.38rem;
-           height:0.48rem;
-        }
-           a{
-            color:#ccc;
-           }
-    }
-}
 .logo{
 	margin-top:0.24rem;
 	img{
@@ -289,5 +226,8 @@
 			line-height:0.8rem;
 		}
 	}
+}
+a{
+	color:#fff;
 }
 </style>

@@ -1,83 +1,21 @@
 <template>
-    <div id="all">
-        <div class="head">
-        	<div @click="back" class="back"><</div>
-        	<h3>商品详情</h3>
-        	<div>
-				<img @click="menuShow" src="../assets/image/23.png">
-        	</div>
-        	<div class="menu" v-show="menuIsActive">
-	            <ul>
-	                <li>
-	                    <img src="../assets/image/18.png">
-	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/19.png">
-	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/20.png">
-	                     <p><router-link :to="{path:'/shopcar'}">购物车</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p>我的消息</p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p><router-link :to="{path:'/search'}">跳转search</router-link></p>
-	                </li>
-	            </ul>
-	        </div>	
-        </div>
-        <div class="logo">
-        	<img src="../assets/image/42.png">
-        	<ul>
-        		<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-        	</ul>
-        </div>
-        <div class="choice">
-        	<h3> Off - White X Nike Air Max 90  THE  TEN 联名沙漠</h3>
-        </div>
+    <div>
         <div class="guar">
         	<h3>保障</h3>
         	<ul>
-				<li><img src="../assets/image/41.png">质量保障</li>
-				<li><img src="../assets/image/41.png">正品保证</li>
-				<li><img src="../assets/image/41.png">多重鉴定</li>
-				<li><img src="../assets/image/41.png">售后保障</li>
+				<li v-for="item in safe"><img src="../assets/image/41.png">{{item}}</li>
 			</ul>
-			<div class="git">
+			<div class="git" @click="$emit('showdigeo')">
 				完成
 			</div>
         </div>
-
-        
-        
-
     </div>
 </template>
 
 <script>
     export default {
         name: "Search",
-        data(){
-            return {
-                menuIsActive: false
-            }
-        },
-        methods:{
-            menuShow(){
-                this.menuIsActive = !this.menuIsActive
-            },
-            back(){
-            	history.back()
-            }
-        }
+		props: ['safe']
     }
 </script>
 
@@ -131,6 +69,9 @@
         padding-bottom:0.30rem;
         width:2rem;
         }
+        .bor{
+        	border:0;
+        }
         img{
            float:left;
            margin-left:0.1rem;
@@ -178,6 +119,7 @@
 	background:#7f7f7f;
 }
 .guar{
+	background: #fff;
 	opacity:1;
 	border-radius: 0.2rem  0.2rem 0 0;
 	width:100%;
@@ -222,5 +164,7 @@
 		margin-left:0.46rem;
 	}
 }
-
+a{
+	color:#fff;
+}
 </style>

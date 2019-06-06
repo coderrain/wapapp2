@@ -18,6 +18,7 @@ import Ours from '../container/Ours.vue'
 import Name from '../container/Name.vue'
 import Head from '../container/Head.vue'
 import Login from '../container/Login.vue'
+import Register from '../container/Register.vue'
 Vue.use(VueRouter)
 
 
@@ -44,7 +45,7 @@ const routes = [
     component: Fication
 },{
     /*商品详情*/
-    path: '/part',
+    path: '/part/:id',
     name: 'part',
     component:Part
 },{
@@ -121,6 +122,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component:Login
+},{
+    /*注册页面*/
+    path: '/register',
+    name: 'register',
+    component:Register
 }]
 
 const router = new VueRouter({
