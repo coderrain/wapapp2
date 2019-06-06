@@ -1,83 +1,83 @@
 <template>
     <div class="all">
         <div class="head">
-        	<div @click="back" class="back"><</div>
-        	<h3>购物车</h3>
-        	<div>
+			<div @click="back" class="back"><</div>
+			<h3>购物车</h3>
+			<div>
 				<img @click="menuShow" src="../assets/image/23.png">
-        	</div>
-        	<div class="menu" v-show="menuIsActive">
-	            <ul>
-	                <li>
-	                    <img src="../assets/image/18.png">
-	                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/19.png">
-	                    <p><router-link :to="{path:'/order'}">全部订单</router-link></p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/20.png">
-	                     <p>购物车</p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p>我的消息</p>
-	                </li>
-	                <li>
-	                    <img src="../assets/image/21.png">
-	                    <p><router-link :to="{path:'/search'}">跳转search</router-link></p>
-	                </li>
-	            </ul>
+			</div>
+			<div class="menu" v-show="menuIsActive">
+				<ul>
+					<li>
+						<img src="../assets/image/18.png">
+						<p><router-link :to="{path:'/my'}">我的</router-link></p>
+					</li>
+					<li>
+						<img src="../assets/image/19.png">
+						<p><router-link :to="{path:'/order'}">全部订单</router-link></p>
+					</li>
+					<li>
+						<img src="../assets/image/20.png">
+						<p>购物车</p>
+					</li>
+					<li>
+						<img src="../assets/image/21.png">
+						<p>我的消息</p>
+					</li>
+					<li>
+						<img src="../assets/image/21.png">
+						<p><router-link :to="{path:'/search'}">跳转search</router-link></p>
+					</li>
+				</ul>
 	        </div>	
         </div>
         <div class="main">
-        	<div class="shoping">
-        	<input type="checkbox" name="">
-        	<img src="../assets/image/40.png">
-        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
+			<div class="shoping">
+			<input type="checkbox" name="">
+			<img src="../assets/image/40.png">
+			<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
         	<div>
 				<span>图片色  </span>
 				<span> 38</span>
-        	</div>
-        	<p>
-        		<span>￥</span>
-        		2989.00
-        		<span class="jum">-</span>
-        		<span class="num">1</span>
-        		<span class="add">+</span>
-        	</p>
-        	</div>
+			</div>
+			<p>
+				<span>￥</span>
+				2989.00
+				<span class="jum">-</span>
+				<span class="num">1</span>
+				<span class="add">+</span>
+			</p>
+			</div>
         </div>
         <div class="main">
-        	<div class="shoping">
-        	<input type="checkbox" name="" style="border-radius:50%;">       	
-        	<img src="../assets/image/40.png">
-        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
-        	<div>
+			<div class="shoping">
+			<input type="checkbox" name="" style="border-radius:50%;">
+			<img src="../assets/image/40.png">
+			<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
+			<div>
 				<span>图片色  </span>
 				<span> 38</span>
-        	</div>
-        	<p>
-        		<span>￥</span>
-        		2989.00
-        		<span class="jum">-</span>
-        		<span class="num">1</span>
-        		<span class="add">+</span>
-        	</p>
-        	</div>
+			</div>
+			<p>
+				<span>￥</span>
+				2989.00
+				<span class="jum">-</span>
+				<span class="num">1</span>
+				<span class="add">+</span>
+			</p>
+			</div>
         </div>
         <div class="foot">
-        	<div class="election">
-				<input type="checkbox" name="">
+			<div class="election">
+				<input type="checkbox" name="" />
 				全选
-        	</div>
-        	<div class="together">
-        		<p>共一件:</p>
-        		<span><i>￥</i>2989.00</span>
-        		<div>去结账</div>
-        	</div>
-       	</div>
+			</div>
+			<div class="together">
+				<p>共一件:</p>
+				<span><i>￥</i>2989.00</span>
+				<div>去结账</div>
+			</div>
+		</div>
     </div>
 </template>
 
@@ -94,7 +94,7 @@
                 this.menuIsActive = !this.menuIsActive
             },
             back(){
-            	history.back()
+				history.back()
             }
         }
     }

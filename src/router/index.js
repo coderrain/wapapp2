@@ -53,6 +53,10 @@ const routes = [
     name: 'custom',
     component:Custom
 },{
+    name: 'user',
+    path: '/user',
+    component: My
+},{
     /*提交订单*/
     path: '/payment',
     name: 'payment',

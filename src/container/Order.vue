@@ -116,7 +116,7 @@
                 this.menuIsActive = !this.menuIsActive
             },
             back(){
-            	history.back()
+				history.back()
             }
         }
     }

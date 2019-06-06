@@ -2,7 +2,7 @@
     <div>
         <h-header></h-header>
 		<div class="search">
-			<input placeholder="           搜索页面" @focus="focusSearch" type="" name="">
+			<input placeholder="搜索页面" @focus="focusSearch" type="" name="">
 			<div class="hot">
 				<h3>热搜</h3>
 				<span v-for="item in hotSearchList">

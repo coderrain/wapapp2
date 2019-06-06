@@ -59,11 +59,11 @@
 						</li>
 					</ul>
 
-        		</div>
-        	</div>
+				</div>
+			</div>
         </div>
         <div class="list">
-        	<ul>
+			<ul>
 				<li>
 					<img src="../assets/image/52.png">
 					我的消息
@@ -102,7 +102,7 @@
                 this.menuIsActive = !this.menuIsActive
             },
             back(){
-            	history.back()
+                history.back()
             }
         }
     }
