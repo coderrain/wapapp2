@@ -33,20 +33,11 @@
 </template>
 
 <script>
+   import Top from '../components/Child/Top.vue'
     export default {
         name: "Search",
-        data(){
-            return {
-                menuIsActive: false
-            }
-        },
-        methods:{
-            menuShow(){
-                this.menuIsActive = !this.menuIsActive
-            },
-            back(){
-            	history.back()
-            }
+        components:{
+        	'top':Top
         }
     }
 </script>

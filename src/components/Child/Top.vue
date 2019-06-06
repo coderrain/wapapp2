@@ -76,14 +76,16 @@
         float:right;
         margin-right:0.3rem;
     }
+    a{
+        color:#fff;
+    }
 }       
 .menu{
     margin-top:0.5rem;
     position: absolute;
     right: .28rem;
     width:3.2rem;
-    background: #000;
-    opacity: 0.8;
+    background: #3e3e3e;
     border-radius:0.08rem;
     li{
        width:3.16rem;
@@ -105,15 +107,13 @@
            float:left;
            margin-left:0.1rem;
            margin-top:0.33rem;
-            width:0.38rem;
+           width:0.38rem;
            height:0.48rem;
            }
            a{
-            color:#ccc;
+            color:#fff;
            }
         }
     }
-a{
-  color:#fff;
-}
+
 </style>

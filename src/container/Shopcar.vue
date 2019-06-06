@@ -57,20 +57,7 @@
         name: "Search",
         components:{
         	'top':Top
-        },
-        data(){
-            return {
-                menuIsActive: false
-            }
-        },
-        methods: {
-            menuShow(){
-                this.menuIsActive = !this.menuIsActive
-            },
-            back(){
-            	history.back()
-            }
-        }
+    	}
     }
 </script>
 
