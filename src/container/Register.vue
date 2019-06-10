@@ -1,5 +1,6 @@
 <template>
-    <div>
+	<transition name="fade">
+    <div v-if="isshow">
         <top></top>
         <div class="log">
         	<img src="../assets/image/59.png">
@@ -7,37 +8,84 @@
         <div class="chon">
         	<div class="name">
         		<img src="../assets/image/60.png">
-        		<input type="" name="" placeholder="请输入手机号码">
+        		<input ref="iphone" type="" name="" placeholder="请输入手机号码">
         	</div>
         	<div class="pass">
         		<img src="../assets/image/61.png">
-        		<input type="" name="" placeholder="请设置密码">
+        		<input ref="pass" type="password" name="" placeholder="请设置密码">
         		<span>忘记密码</span>
         	</div>
         	<div class="pass">
         		<img src="../assets/image/62.png">
-        		<input type="" name="" placeholder="请输入验证码">
-        		<span class="get">获取验证码</span>
+        		<input ref="test" type="" name="" placeholder="请输入验证码">
+        		<span class="get" @click="gettest">获取验证码</span>
         	</div>
-        	<div class="ok">注册</div>
+        	<div class="ok" @click="get">注册</div>
         	<div class="Short">
         		<span class="right">登陆</span>
         	</div>
         </div>
     </div>
+    </transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Register",
         components:{
         	'top':Top
+    	},
+    	data(){
+    		return {
+    			code:'',
+    			isshow:true
+    		}
+    	},
+    	methods:{
+    		get(){
+    			let iphone = this.$refs.iphone.value
+    			let pass = this.$refs.pass.value
+    			if(iphone.length<=0 || pass.length<=0){
+    				alert('请填写账号或者密码')
+    				return;
+    			}
+    			this.$axios.post('/api/user/reg',{
+    					username:iphone,
+    					password:pass,
+    					code:this.code
+    				
+    			}).then(data=>{
+    				if(data.data.code==0){
+    					alert('此账号已经存在')
+    				}else{
+						alert('注册成功跳转登录')
+    					this.$router.push('/login')
+    				}	
+    			})
+    			this.isshow = !isshow
+    			this.$router.push('/login')
+    		},
+    		gettest(){
+    			this.$axios.get('/api/user/code').then(data=>{
+    				this.code = data.data
+    				alert(this.code)
+    			})
+    		}
     	}
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+		  transition: all 0.5s ease;
+		}
+		.fade-leave-active {
+		  transition: all 0.5s ;
+		}
+		.fade-enter, .fade-leave-to{
+		  transform: translateX(750px);
+		}
 .log{
 	height:2.26rem;
 	width:7.5rem;
@@ -132,8 +180,5 @@
 	.right{
 		float:right;
 	}
-}
-a{
-	color:#fff;
 }
 </style>

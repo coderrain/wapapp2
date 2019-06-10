@@ -1,89 +1,112 @@
 <template>
+	<transition name="fade">
     <div class="all">
         <top></top>
         <div class="nav">
         	<ul>
-				<li class="col">全部订单</li>
-				<li>待付款</li>
-				<li>待收货</li>
-				<li>已完成</li>
+				<li @click="all($event)">全部订单</li>
+				<li @click="wait(2,$event)">待付款</li>
+				<li @click="wait(3,$event)">待收货</li>
+				<li @click="wait(1,$event)">已完成</li>
 			</ul>
         </div>
-        <div class="num">
-	        	<span>订单编号：90128598276</span>
-	        	<img src="../assets/image/43.png">
-	        	<p>待收货</p>
-        </div>
-        <div class="main">
-        	<div class="shoping">
-        	<img src="../assets/image/40.png">
-        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
-        	<div>
-				<span>图片色  </span>
-				<span> 38</span>
-        	</div>
-        	<p>
-        		<span>￥</span>
-        		2989.00
-        		<strong>x1</strong>
-        	</p>
-        	</div>
-        	<div class="show">
-        		<p>共一件商品 实付款</p>
-        		<span><i>￥</i>2989.00</span>
-        		<ul>
-					<li>删除订单</li>
-					<li class="ok">确认订单</li>
-				</ul>
-        	</div>
-        </div>
-        <div class="num">
-	        <span>订单编号：90128598276</span>
-	        <img src="../assets/image/44.png">
-	        <p class="over">已完成</p>
-        </div>
-        <div class="main">
-        	<div class="shoping">
-        	<img src="../assets/image/40.png">
-        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
-        	<div>
-				<span>图片色  </span>
-				<span> 38</span>
-        	</div>
-        	<p>
-        		<span>￥</span>
-        		2989.00
-        		<strong>x1</strong>
-        	</p>
-        	</div>
-        	<div class="show">
-        		<p>共一件商品 实付款</p>
-        		<span><i>￥</i>2989.00</span>
-        		<ul>
-					<li>删除订单</li>
-					<li class="ok">确认订单</li>
-				</ul>
-        	</div>
-        </div>
-        <div class="num">
-	        <span>订单编号：90128598276</span>
-	        <img src="../assets/image/45.png">
-	        <p class="date">代付款</p>
-        </div>
+        <ul>
+        	<li v-for="item in list">
+        		<div class="num">
+	        	<span>订单编号：{{ item.num}}</span>
+	        	<img :src="item.image">
+	        	<p>{{ item.state}}</p>
+		        </div>
+		        <div class="main">
+		        	<div class="shoping">
+		        	<img :src="item.url">
+		        	<span class="desert">{{ item.name }}</span>
+		        	<div>
+						<span>图片色  </span>
+						<span> 38</span>
+		        	</div>
+		        	<p>
+		        		<span>￥</span>
+		        		{{ item.monye }}
+		        		<strong>x1</strong>
+		        	</p>
+		        	</div>
+		        	<div class="show">
+		        		<p>共一件商品 实付款</p>
+		        		<span><i>￥</i>{{ item.monye }}</span>
+		        		<ul>
+							<li>删除订单</li>
+							<li class="ok">确认订单</li>
+						</ul>
+		        	</div>
+		        </div>
+        	</li>
+        </ul>
     </div>
+    </transition>
 </template>
 
 <script>
- 	import Top from '../components/Child/Top.vue'
+ 	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Order",
         components:{
         	'top':Top
-    	}
+        },
+        data(){
+        	return {
+        		list:[]
+
+        	}
+        },
+        methods:{
+        	wait(id){
+        		var oLi = event.target.parentNode.children
+        		for(var i=0;i<oLi.length;i++){
+        			oLi[i].style.color = 'black'
+        		}
+        		event.target.style.color="#00c0c2"
+        		this.$axios.get('/api/shopMark').then(data=>{
+        			var result = data.data.data[10].shopcar
+        			this.list = []
+        			result.map(item=>{
+        				if(item.id==id){
+        					this.list= item
+        					console.log(this.list)
+        				}
+        			})	
+        		})
+        	},
+        	all(){
+        		var oLi = event.target.parentNode.children
+        		for(var i=0;i<oLi.length;i++){
+        			oLi[i].style.color = 'black'
+        		}
+        		event.target.style.color="#00c0c2"
+        		this.listed=[]
+        		this.$axios.get('/api/shopMark').then(data=>{
+        		var result = data.data.data[10].shopcar
+        		this.list = result
+        	})
+        	}
+        },
+        created(){
+        	this.all()
+        }
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1s ease;
+}
+.fade-leave-active {
+	transition: all 1s ease;
+}
+.fade-enter, .fade-leave-to{
+	opacity: 0;
+	transform: translateX(750px);
+}
 .all{
 	background:#f7f7f7;
 }
@@ -99,9 +122,6 @@
 		flex:1;
 		line-height:0.88rem;
 		font-size:0.28rem;
-	}
-	.col{
-		color:#00c0c2;
 	}
 
 }

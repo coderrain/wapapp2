@@ -1,44 +1,44 @@
 <template>
-    <div id="all">
-        <top></top>
-        <div class="logo">
-        	<img src="../assets/image/42.png">
-        	<ul>
-        		<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-        	</ul>
-        </div>
-        <div class="choice">
-        	<h3> Off - White X Nike Air Max 90  THE  TEN 联名沙漠</h3>
-        </div>
+    <div>
         <div class="guar">
         	<h3>参数</h3>
         	<ul>
-				<li>配色<span>棕色/黑色</span></li>
-				<li>货号<span>308497-060</span></li>
-				<li>官方价格<span>￥1399仅供参考</span></li>
-				<li>发售日期<span>2019.05.04</span></li>
+				<li v-for="item in meter">
+					{{ item.type }}
+					<span>{{ item.title }}</span>
+				</li>
+
 			</ul>
-			<div class="git">
+			<div class="git" @click="fn">
 				完成
 			</div>
         </div>
-
-        
-        
-
     </div>
 </template>
 
 <script>
- 	import Top from '../components/Child/Top.vue'
     export default {
-        name: "Search",
-        components:{
-        	'top':Top
-    	}
+        name: "Parameter",
+		methods:{
+			fn(){
+				this.$emit('showdigeo')
+				this.$root.$el.style.background='#fff';
+			}
+		},
+		data(){
+			return {
+				meter:[]
+			}
+		},
+		created(){
+			this.$axios.get('/api/search').then(data=>{
+				this.meter = data.data.data
+				for(var i=0;i<this.meter.length;i++){
+					this.meter = this.meter[i]
+				}
+				this.meter = this.meter.para
+			})
+		}
     }
 </script>
 
@@ -85,6 +85,7 @@
 	bottom:0;
 	left:0;
 	height:6.6rem;
+	background:#fff;
 	h3{
 		height:0.58rem;
 		line-height:0.58rem;
@@ -92,7 +93,6 @@
 		margin-top:0.26rem;
 		font-weight:700;
 		font-size:0.3rem;
-
 	}
 	ul{
 		height:3.55rem;
@@ -125,5 +125,4 @@
 a{
 	color:#fff;
 }
-
 </style>

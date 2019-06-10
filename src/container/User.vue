@@ -1,19 +1,23 @@
 <template>
+	<transition name="fade">
     <div>
        
        <top></top>
         <div class="name">
         	<div class="my">
         		<img src="../assets/image/48.png">
-        		<h3>大侠</h3>
+        		<h3>{{ name }}</h3>
         		<p>1602788223</p>
         		<span><router-link :to="{path:'/ours'}">个人中心 ></router-link></span>
         	</div>
         	<div class="order">
+        		<router-link :to="{path:'/order'}">
         		<div class="top">
         			<p>我的订单</p>
         			<span>查看全部订单 ></span>
         		</div>
+        		</router-link>
+        		<router-link :to="{path:'/order'}">
         		<div class="bottom">
         			<ul>
 						<li>
@@ -29,12 +33,12 @@
 							<p>已完成</p>
 						</li>
 					</ul>
-
-        		</div>
-        	</div>
+				</div>
+				</router-link>
+			</div>
         </div>
         <div class="list">
-        	<ul>
+			<ul>
 				<li>
 					<img src="../assets/image/52.png">
 					我的消息
@@ -58,28 +62,54 @@
 			</ul>
         </div>
     </div>
+    </transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "User",
         components:{
         	'top':Top
-    	}
+        },
+        data(){
+        	return {
+        		name:''
+        	}
+        },
+        created(){
+        	this.fn()
+        },
+        methods:{
+        	fn(){
+        		this.$axios.post('/api/user/resetname').then(data=>{
+    				this.name = data.data.username
+    				console.log(this.name)
+    			})
+        	}
+        }
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+    transition: all 1s ease;
+}
+.fade-leave-active {
+    transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+    transform: translateX(750px);
+}
 
 .name{
-	overflow:hidden;
 	border-radius: 0 0 0.4rem 0.4rem;
 	margin-top:0.2rem;
-	height:4.24rem;
+	height:4.44rem;
 	background:#48d6d7;
 	width:100%;
 	.my{
+		overflow:hidden;
 		position:relative;
 		height:1.54rem;
 		width:6.96rem;
@@ -146,6 +176,7 @@
 					margin-top:0.45rem;
 					margin-bottom:0.22rem;
 				}
+
 				width:0.7rem;
 				height:1.74rem;
 				float:left;
@@ -158,6 +189,7 @@
 }
 .list{
 	li{
+		margin-top:0.2rem;
 		height:1.25rem;
 		font-size:0.24rem;
 		color:black;

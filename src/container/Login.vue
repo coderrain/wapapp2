@@ -1,4 +1,5 @@
 <template>
+	<transition name="fade">
     <div>
         <top></top>
         <div class="log">
@@ -7,33 +8,88 @@
         <div class="chon">
         	<div class="name">
         		<img src="../assets/image/60.png">
-        		<input type="" name="" placeholder="请输入账号">
+        		<input ref="username" type="" name="" placeholder="请输入账号">
         	</div>
         	<div class="pass">
         		<img src="../assets/image/61.png">
-        		<input type="" name="" placeholder="请输入密码">
+        		<input ref="password" type="password" name="" placeholder="请输入密码">
         		<span>忘记密码</span>
         	</div>
-        	<div class="ok">登录</div>
+        	<div class="pass">
+        		<img src="../assets/image/61.png">
+        		<input ref="test" type="" name="" placeholder="请输入验证码">
+        		<span @click="gettest">获取验证码</span>
+        	</div>
+        	<div class="ok" @click="get">
+        		登录
+        	</div>
         	<div class="Short">
-        		<span>短信验证登录</span>
-        		<span class="right">注册</span>
+        		<span class="right">
+        		<router-link :to="{path:'/register'}">注册
+        		</router-link>
+        		</span>
         	</div>
         </div>
     </div>
+</transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Login",
         components:{
         	'top':Top
+    	},
+    	data(){
+    		return {
+    			code:''
+    		}
+    	},
+    	methods:{
+    		get(){
+    			let user = this.$refs.username.value
+    			let pass = this.$refs.password.value
+    			console.log(user.length)
+    			if(user.length<=0 || pass.length<=0){
+    				alert('请填写账号或者密码')
+    				return;
+    			}
+    			this.$axios.post('/api/user/login',{
+    					username:user,
+    					password:pass,
+    					code:this.code
+    				
+    			}).then(data=>{
+    				if(data.data.code==1){
+    					this.$router.push('/user')
+    				}
+    				else{
+    					alert('登录失败')
+    				}
+    				
+    			})
+    		},
+    		gettest(){
+    			this.$axios.get('/api/user/code').then(data=>{
+    				this.code = data.data
+    				alert(this.code)
+    			})
+    		}
     	}
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1s ease;
+}
+.fade-leave-active {
+	transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+	transform: translateX(-750px);
+}
 .log{
 	height:2.26rem;
 	width:7.5rem;
@@ -122,11 +178,11 @@
 	color:#acacac;
 	margin-left:0.22rem;
 	padding-top:0.3rem;
+	a{
+		color:#acacac;
+	}
 	.right{
 		float:right;
 	}
-}
-a{
-	color:#fff;
 }
 </style>

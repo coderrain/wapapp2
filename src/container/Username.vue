@@ -1,25 +1,46 @@
 <template>
+    <transition name="fade">
     <div>
         <top></top>
         <div class="hello">
         	您好！请输入你要使用的昵称
         </div>
-		<input type="" name="" placeholder="请设置昵称">
-		<div class="ok">完成</div>
+		<input ref="username" type="" name="" placeholder="请设置昵称">
+		<div class="ok" @click="fn">完成</div>
     </div>
+    </transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Name",
         components:{
         	'top':Top
+    	},
+    	methods:{
+    		fn(){
+    			var user = this.$refs.username.value
+    			this.$axios.post('/api/user/resetname',{
+    				username:user
+    			}).then(data=>{
+    				this.$router.push('/ours')
+    			})
+    		}
     	}
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+    transition: all 1s ease;
+}
+.fade-leave-active {
+    transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+    transform: translateX(-750px);
+}
 .hello{
 	width:7.3rem;
 	height:0.9rem;

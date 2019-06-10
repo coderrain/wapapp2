@@ -65,9 +65,9 @@
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Overbooking",
         components:{
         	'top':Top
    		}
@@ -295,8 +295,5 @@
 		line-height:0.8rem;
 		font-size:0.3rem;
 	}
-}
-a{
-	color:#fff;
 }
 </style>

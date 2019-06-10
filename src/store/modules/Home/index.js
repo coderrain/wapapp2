@@ -1,11 +1,15 @@
+import { getMenu } from '../../../api/index'
 export default {
+    namespaced: 'home',
     state:{
-        list: [{
-            url:'',
-            title: 'appiy',
-            id: 1
-        }]
+        list: []
     },
     getter:{},
-    mutations:{}
+    mutations:{
+        getMenuFn(state){
+            getMenu().then(res=>{
+                state.list = res.data.list
+            })
+        }
+    }
 }

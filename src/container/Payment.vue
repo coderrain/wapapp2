@@ -3,7 +3,7 @@
         <top></top>
         <div class="name">
         	<p>王冉</p>
-        	<span class="num">188****1699</span>
+			<span class="num">188****1699</span>
         	<span class="address">陕西省西安市长安区韦曲街道长安警苑三单元701室</span>
         	<span class="mup">></span>
         </div>
@@ -40,16 +40,16 @@
         	<div>
         		<p>实付款:</p>
         		<span>￥2989.00</span>
-        		<div>确认支付</div>
+				<div>确认支付</div>
         	</div>
         </div>
     </div>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Payment",
         components:{
         	'top':Top
     	}
@@ -216,8 +216,5 @@
 			font-weight:700;
 		}
 	}
-}
-a{
-	color:#fff;
 }
 </style>

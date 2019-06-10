@@ -1,13 +1,13 @@
 <template>
         <div class="head">
-            <div @click="back" class="back"><</div>
+            <div @click="back" class="back">&lt;</div>
             <h3>商品详情</h3>
                 <img @click="menuShow" src="../../assets/image/23.png">
             <div class="menu" v-show="menuIsActive">
                 <ul>
                     <li>
                         <img src="../../assets/image/18.png">
-                        <p><router-link :to="{path:'/my'}">我的</router-link></p>
+                        <p><router-link :to="{path:'/user'}">我的</router-link></p>
                     </li>
                     <li>
                         <img src="../../assets/image/19.png">
@@ -95,7 +95,6 @@
        p{
         margin-top:0.33rem;
         float:left;
-        margin-left:0.38rem;
         border-bottom: 1px solid #ccc;
         padding-bottom:0.30rem;
         width:2rem;
@@ -105,7 +104,7 @@
         }
         img{
            float:left;
-           margin-left:0.1rem;
+           margin-left:0.2rem;
            margin-top:0.33rem;
            width:0.38rem;
            height:0.48rem;

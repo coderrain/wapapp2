@@ -4,19 +4,16 @@ import Home from '../container/Home.vue'
 import Search from '../container/Search.vue'
 import Fication from '../container/Fication.vue'
 import Part from '../container/Part.vue'
-import Custom from '../container/Custom.vue'
 import Payment from '../container/Payment.vue'
-import Guarantee from '../container/Guarantee.vue'
-import Parameter from '../container/Parameter.vue'
 import Receiving from '../container/Receiving.vue'
 import Adm from '../container/Adm.vue'
 import Order from '../container/Order.vue'
 import Shopcar from '../container/Shopcar.vue'
 import Overbooking from '../container/Overbooking.vue'
-import My from '../container/My.vue'
+import User from '../container/User.vue'
 import Ours from '../container/Ours.vue'
-import Name from '../container/Name.vue'
-import Head from '../container/Head.vue'
+import Username from '../container/Username.vue'
+import Portrait from '../container/Portrait.vue'
 import Login from '../container/Login.vue'
 import Register from '../container/Register.vue'
 Vue.use(VueRouter)
@@ -45,29 +42,18 @@ const routes = [
     component: Fication
 },{
     /*商品详情*/
-    path: '/part',
+    path: '/part/:id',
     name: 'part',
     component:Part
 },{
-    /*选项列表*/
-    path: '/custom',
-    name: 'custom',
-    component:Custom
+    name: 'user',
+    path: '/user',
+    component: User
 },{
     /*提交订单*/
     path: '/payment',
     name: 'payment',
     component:Payment
-},{
-    /*订单的质量保障页面*/
-    path: '/guarantee',
-    name: 'guarantee',
-    component:Guarantee
-},{
-    /*订单的参数页面*/
-    path: '/parameter',
-    name: 'parameter',
-    component:Parameter
 },{
     /*填收货地址页面*/
     path: '/receiving',
@@ -94,25 +80,20 @@ const routes = [
     name: 'overbooking',
     component:Overbooking
 },{
-    /*我的页面*/
-    path: '/my',
-    name: 'my',
-    component:My
-},{
     /*修改我的资料*/
     path: '/ours',
     name: 'ours',
     component:Ours
 },{
     /*修改我的名称*/
-    path: '/name',
-    name: 'name',
-    component:Name
+    path: '/username',
+    name: 'username',
+    component:Username
 },{
     /*修改我的头像*/
-    path: '/head',
-    name: 'head',
-    component:Head
+    path: '/portrait',
+    name: 'portrait',
+    component:Portrait
 },{
     /*登陆页面*/
     path: '/login',
@@ -131,3 +112,6 @@ const router = new VueRouter({
 
 
 export default router;
+
+
+

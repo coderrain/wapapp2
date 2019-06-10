@@ -1,67 +1,85 @@
 <template>
+	<transition name="fade">
     <div class="all">
         <top></top>
-        <div class="main">
-        	<div class="shoping">
-        	<input type="checkbox" name="">
-        	<img src="../assets/image/40.png">
-        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
+        <div v-for="item in list" class="main">
+			<div class="shoping">
+			<input ref="int" type="checkbox" name="">
+			<img :src="item.url">
+			<span class="desert">{{ item.name }}</span>
         	<div>
 				<span>图片色  </span>
 				<span> 38</span>
-        	</div>
-        	<p>
-        		<span>￥</span>
-        		2989.00
-        		<span class="jum">-</span>
-        		<span class="num">1</span>
-        		<span class="add">+</span>
-        	</p>
-        	</div>
-        </div>
-        <div class="main">
-        	<div class="shoping">
-        	<input type="checkbox" name="" style="border-radius:50%;">       	
-        	<img src="../assets/image/40.png">
-        	<span class="desert">Off-White X Nike Air Max 90 THE TEN 联名 沙漠</span>
-        	<div>
-				<span>图片色  </span>
-				<span> 38</span>
-        	</div>
-        	<p>
-        		<span>￥</span>
-        		2989.00
-        		<span class="jum">-</span>
-        		<span class="num">1</span>
-        		<span class="add">+</span>
-        	</p>
-        	</div>
+			</div>
+			<p>
+				<span>￥{{ item.monye }}</span>
+				
+				<span class="jum">-</span>
+				<span class="num">1</span>
+				<span class="add">+</span>
+			</p>
+			</div>
         </div>
         <div class="foot">
-        	<div class="election">
-				<input type="checkbox" name="">
+			<div class="election">
+				<input @click='fn' type="checkbox" name="" />
 				全选
-        	</div>
-        	<div class="together">
-        		<p>共一件:</p>
-        		<span><i>￥</i>2989.00</span>
-        		<div>去结账</div>
-        	</div>
-       	</div>
+			</div>
+			<div class="together">
+				<p>共一件:</p>
+				<span><i>￥{{ list.monye }}</i></span>
+				<div>去结账</div>
+			</div>
+		</div>
     </div>
+    </transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
         name: "Search",
         components:{
         	'top':Top
-    	}
+		},
+		data(){
+			return {
+				list:[]
+			}
+		},
+		created(){
+			this.$axios.get('/api/shopMark').then(data=>{
+				var result = data.data.data[10].shopcar
+				this.list = result
+			})
+		},
+		methods:{
+			fn(event){
+				if(event.target.checked){
+					this.$refs.int.map(item=>{
+						item.checked='true'
+					})
+				}else{
+					this.$refs.int.map(item=>{
+						item.checked=''
+					})
+				}
+				
+			}
+		}
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1s ease;
+}
+.fade-leave-active {
+	transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+	transform: translateX(-750px);
+}
 
 .main{
 	.shoping{
@@ -136,7 +154,8 @@
 			color:#ed3a40;
 		}
 		.num{
-			margin-left:1.35rem;
+			position: absolute;
+			left:6.4rem;
 			font-size:0.35rem;
 			color:black;
 			margin-bottom:0.1rem;
@@ -214,8 +233,5 @@
 			font-size:0.24rem;
 		}
 	}
-}
-a{
-	color:#fff;
 }
 </style>

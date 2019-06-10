@@ -1,18 +1,19 @@
 <template>
+	<transition name="fade">
     <div>
         <top></top>
         <ul>
 			<li class="list">
 				<span>头像</span>
 				
-					<router-link :to="{path:'/head'}"><img src="../assets/image/56.png"></router-link>
+					<router-link :to="{path:'/portrait'}"><img src="../assets/image/56.png"></router-link>
 					<strong>></strong>
 				
 			</li>
 			<li class="list">
 				<span>昵称</span>
 				
-					<p><router-link :to="{path:'/name'}">大侠</router-link></p>
+					<p><router-link :to="{path:'/username'}">{{ name }}</router-link></p>
 					<strong>></strong>
 				
 			</li>
@@ -25,19 +26,45 @@
 			</li>
 		</ul>
     </div>
+    </transition>
 </template>
 
 <script>
-   	import Top from '../components/Child/Top.vue'
+   	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Ours",
         components:{
         	'top':Top
+    	},
+    	data(){
+    		return {
+    			name:''
+    		}
+    	},
+    	created(){
+    		this.fn()
+    	},
+    	methods:{
+    		fn(){
+    			this.$axios.post('/api/user/resetname').then(data=>{
+    				console.log(data)
+    				this.name = data.data.username
+    			})
+    		}
     	}
     }	
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1.2s ease;
+}
+.fade-leave-active {
+	transition: all 1.2s;
+}
+.fade-enter, .fade-leave-to{
+	transform: translateX(-750px);
+}
 
 ul{
 	margin-top:0.2rem;
@@ -81,8 +108,5 @@ ul{
 	}
 	
 
-}
-a{
-	color:#fff;
 }
 </style>

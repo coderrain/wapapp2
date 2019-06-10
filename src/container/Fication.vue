@@ -1,52 +1,100 @@
 <template>
+    <transition name="fade">
     <div>
         <top></top>
         <div class="search">
-			<input type="" name="" placeholder="搜素商品">
+			<input @keyup="ipt" ref="int" type="" name="" placeholder="搜素商品">
         </div>
     <div class="main">
     	<div class="list">
     		<ul>
-				<li>品牌</li>
-				<li>系列</li>
-				<li>篮球鞋</li>
-				<li>跑鞋</li>
-				<li>休闲鞋</li>
-				<li>朝服</li>
-				<li>手表</li>
-				<li>手办</li>
-				<li>数码</li>
-				<li>运动服</li>
+				<li @click="fn(item.id,$event)" v-for=" item in brand">
+					{{ item.name }}
+				</li>
 			</ul>
     	</div>
     	<div class="show">
     		<ul>
-				<li><img src="../assets/image/25.png"></li>
-				<li><img src="../assets/image/26.png"></li>
-				<li><img src="../assets/image/27.png"></li>
-				<li><img src="../assets/image/28.png"></li>
-				<li><img src="../assets/image/29.png"></li>
-				<li><img src="../assets/image/30.png"></li>
-				<li><img src="../assets/image/31.png"></li>
-				<li><img src="../assets/image/32.png"></li>
-				<li><img src="../assets/image/33.png"></li>
+				<li v-for="item in list">
+					<img :src="item.url" alt="">	
+					
+				</li>
 			</ul>
     	</div>
     </div>
     </div>
+    </transition>
 </template>
 
 <script>
-   	import Top from '../components/Child/Top.vue'
+   	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Fication",
+        data(){
+        	return {
+        		brand:[],
+        		list:[]
+        	}
+        },
         components:{
-        	'top':Top
+        	'top':Top,
+
+        },
+        created(){
+        	this.$axios.get('/api/shopMark').then(data=>{
+        		this.brand = data.data.data
+        	})
+        },
+        methods:{
+        	fn(item,event){
+                this.$axios.get('/api/shopList',{
+                    params:{
+                        shopId:item
+                    }
+                }).then(data=>{
+                    this.list =  data.data.data
+                })  
+                var oUl = event.path[1].childNodes
+                console.log(oUl)
+                oUl.forEach(item=>{
+                    item.style.background="#ccc"
+                })
+                event.target.style.background="#fff"
+                oUl.style.background="#red"
+        		
+
+        	},
+            ipt(){
+               this.$axios.get('/api/search',{
+                    title:this.$refs.int.value
+               }).then(data=>{
+                this.list=[]
+                var data = data.data.data
+                var val = this.$refs.int.value
+                data.map(item=>{
+                    if(val==item.title){
+                        this.list.push(item)
+                    }
+                })
+                    
+               })
+            }
         }
+        	
     }
+
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+    transition: all 1s ease;
+}
+.fade-leave-active {
+    transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+    transform: translateX(750px);
+}
 .search{
 	border-radius:0.3rem;
 	margin-top:0.44rem;
@@ -96,15 +144,14 @@
  			height:1.88rem;
  			margin-top:0.51rem;
  			img{
- 				width:1.2rem;
- 				height:1.2rem;
- 				margin-top:0.1rem;
- 				margin-left:0.2rem;
+	 				width:1.2rem;
+	 				height:1.2rem;
+	 				margin-top:0.1rem;
+	 				margin-left:0.2rem;
  			}
+ 				
+ 			
  		}
  	}
  }
- a{
-	color:#fff;
-}
 </style>

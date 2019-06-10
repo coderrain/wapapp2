@@ -1,12 +1,13 @@
 <template>
+    <transition name="fade">
     <div>
         <h-header></h-header>
 		<div class="search">
-			<input placeholder="           搜索页面" @focus="focusSearch" type="" name="">
+			<input placeholder="搜索页面" @focus="focusSearch" type="" name="">
 			<div class="hot">
 				<h3>热搜</h3>
 				<span v-for="item in hotSearchList">
-					<router-link :to="{path:'/search',query:{name: item.name}}">{{ item.name }}</router-link>
+					<router-link :to="{path:'/search',query:{name: item.title}}">{{ item.title }}</router-link>
 				</span>
 
 			</div>
@@ -14,40 +15,100 @@
 		</div>
        	<div class="swiper">
 			<div class="top"></div>
-			<img :src="banner">
+			<img src="../assets/image/2.png">
        	</div>
-        <Menu></Menu>
+        <div class="menu">
+          <div class="nav">
+            <ul>
+                <li v-for="item in shopList">
+                    <div>
+                        <img :src="item.url">
+                        <p>{{ item.name }}</p>
+                    </div>
+                </li>
+            </ul>
+          </div>
+
     </div>
+        <div class="enough">
+            <img src="../assets/image/1.png">
+        </div>
+        <div class="choes">
+            <ul>
+                <li v-for=" item in shopJordan">
+                    <img :src="item.imgUrl">
+                </li>
+            </ul>
+        </div>
+        <div class="popul">
+            <img src="../assets/image/15.png">
+            <span>人气精选</span>
+        </div>
+        <div class="list">
+            <ul>
+                <li v-for="item in shopShoes">
+                    <router-link :to="{name:'part',params:{id:item.id}}">
+                        <div>
+                            <img v-lazy="item.url[0]">
+                        </div>
+                        <p>{{ item.title }}</p>
+                        <span>￥{{item.price}}</span>
+                        <span class="people">{{item.chose}}人付款</span>
+                    </router-link>
+                </li>
+            </ul>
+        </div>
+    </div>
+    </transition>
 </template>
 
 <script>
     import Hheader from '../components/Home/Hheader.vue'
-    import Menu from '../components/Home/Menu.vue'
     export default {
         name: "Home",
         components: {
             'h-header': Hheader,
-            'Menu':Menu
         },
 		data(){
         	return {
-				hotSearchList: [
-						{
-							name: 'Air Jordan'
-						},{
-							name: 'Yeezy'
-						},{
-							name: '华为'
-						},{
-							name: 'iphone'
-						}
-				],
-				banner: require( '../assets/image/2.png')
+				hotSearchList:[],
+				banner: '',
+                shopList:[],
+                shopJordan:[],
+                shopShoes:[]
 			}
 		},
-		created(){
-
-		},
+        created(){
+            this.$axios.get('/api/shopList',{
+                params:{
+                    "hot":1
+                }
+            }).then(data=>{
+               this.hotSearchList = data.data.data
+               
+            })
+            this.$axios.get('/api/shopMark',{
+                params:{
+                    page:1,
+                    pageSize:8
+                }
+            }).then(data=>{
+               this.shopList = data.data.data
+               console.log(data.data.data)
+            })
+            this.$axios.get('/api/ad').then(data=>{
+               this.shopJordan = data.data.data
+               console.log(data.data.data)
+            })
+            this.$axios.get('/api/shopListPage',{
+                params:{
+                    page:1,
+                    pageSize:4
+                }
+            }).then(data=>{
+               this.shopShoes = data.data.data
+            })
+        },
 		methods: {
 			focusSearch(){
 				this.$router.push('/search')
@@ -57,9 +118,23 @@
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+    opacity: 0;
+    transition: all 2s ease;
+}
+.fade-leave-active {
+    opacity: 1;
+    transition: all 2s;
+}
+.fade-enter, .fade-leave-to{
+    transform: translateX(-750px);
+}
 .search{
 	height:1.55rem;
 	background:#51dfe0;
+    input::-webkit-input-placeholder {
+        padding-left:0.6rem;
+    }
 	input{
 		background:#fff url('../assets/image/24.png') no-repeat 0.15rem;
 		background-size:5%;
@@ -119,7 +194,99 @@
 		margin-left:0.2rem;
 	}
 }
-a{
-	color:#fff;
+.enough{
+    height:1.7rem;
+    padding-bottom:0.1rem;
+    img{
+        width:7.1rem;
+        height:1.7rem;
+        margin-left:0.2rem;
+    }
 }
+.choes{
+    ul{
+        img{
+            width:3.5rem;
+            height:1.7rem;
+            float:left;
+            margin-left:0.2rem;
+            margin-top:0.1rem;
+        }
+        height:3.56rem;
+        margin-top:0.1rem;
+        
+    }
+}
+.popul{
+    img{
+        padding-right:0.08rem;
+        margin-left:0.2rem;
+        margin-top:0.38rem;
+        width:0.35rem;
+        height:0.35rem;
+    }
+    height:1.1rem;
+    width:100%;
+    span{
+        color:#000;
+        font-size:0.32rem;
+    }
+}
+.list{
+    ul{
+        margin: 0 0.2rem;
+    }
+    .nv{
+        margin-left:0.1rem;
+    }
+    li{
+        float:left;
+        img{
+            height:3.42rem;
+            width:3.5rem;
+        }
+        p{
+            width:3.1rem;
+            font-size:0.28rem;
+            margin-left:0.2rem;
+            color:#282828;
+            margin-right:0.2rem;
+            padding-bottom:0.4rem;
+        }
+        span{
+            float:left;
+            display:block;
+            margin-left:0.2rem;
+            font-size:0.28rem;
+            color:#F63131;
+            padding-bottom:0.54rem;
+        }
+        .people{
+            font-size:0.24rem;
+            color:#888888;
+            margin-left:0.43rem;
+            margin-top:0.05rem;
+        }
+    }
+}
+.nav{
+    height:3.82rem;
+    li{
+        float:left;
+        width:1.87rem;
+        img{
+            width:0.9rem;
+            height:0.9rem;
+            margin-left:0.5rem;
+            margin-top:0.34rem;
+        }
+        p{
+            margin-top:0.16rem;
+            text-align:center;
+            font-size:0.2rem;
+            color:#353535;
+        }
+    }
+}
+
 </style>

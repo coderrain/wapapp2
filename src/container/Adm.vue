@@ -22,9 +22,9 @@
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Adm",
         components:{
         	'top':Top
         }
@@ -32,9 +32,6 @@
 </script>
 
 <style scoped lang="less">
-a{
-	color:#fff;
-}
 .name{
 	margin-top:0.4rem;
 	position:relative;
@@ -98,5 +95,4 @@ a{
 	font-size:0.22rem;
 	color:#fff;
 }
-
 </style>

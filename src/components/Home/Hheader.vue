@@ -9,7 +9,7 @@
             <ul>
                 <li>
                     <img src="../../assets/image/18.png">
-                    <p><router-link :to="{path:'/my'}">我的</router-link></p>
+                    <p><router-link :to="{path:'/user'}">我的</router-link></p>
                 </li>
                 <li>
                     <img src="../../assets/image/19.png">
@@ -21,7 +21,7 @@
                 </li>
                 <li>
                     <img src="../../assets/image/21.png">
-                    <p>我的消息</p>
+                    <p><router-link :to="{path:'/login'}">登陆</router-link></p>
                 </li>
                 <li>
                     <img src="../../assets/image/21.png">
@@ -120,7 +120,7 @@
                     height:0.48rem;
                 }
                 a{
-                    color:#ccc;
+                    color:#fff;
                 }
             }
 

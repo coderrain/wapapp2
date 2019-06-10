@@ -1,30 +1,31 @@
 <template>
+	<transition name="fade">
     <div>
         <top></top>
         <div class="logo">
-        	<img src="../assets/image/35.png">
-        	<ul>
-        		<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-        	</ul>
+        	<div class="image">
+	        	<mt-swipe :auto="4000">
+				  <mt-swipe-item v-for="item in parment">
+				  	<img :src="item.url[0]" alt="">
+				  </mt-swipe-item>
+				</mt-swipe>
+			</div>
         </div>
         <div class="choice">
-        	<h3> Off - White X Nike Air Max 90  THE  TEN 联名沙漠</h3>
-        	<span class="money"><span>￥</span>2989.00</span>
-        	<span class="people">274人付款</span>
-        	<div class="size">
+        	<h3></h3>
+        	<span class="money"><span>￥{{ ments.price }}</span></span>
+        	<span class="people">{{ ments.chose }}人付款</span>
+        	<div class="size" @click="showcust">
 	        	<span class="cho">选择</span>
 				<span class="col">选择颜色分类    尺码</span>
 				<span class="jump">></span>
         	</div>
-        	<div class="size">
+        	<div class="size" @click="showgran">
 	        	<span class="cho">保障</span>
 				<span class="col">质量保障·正品保证·多重鉴定·售后保障</span>
 				<span class="jump">></span>
         	</div>
-        	<div class="size">
+        	<div class="size" @click="showpara">
 	        	<span class="cho">参数</span>
 				<span class="col">品牌 闭合方式...</span>
 				<span class="jump">></span>
@@ -34,53 +35,115 @@
         	<h3>
         	————	商品详情   ————
         	</h3>
-        	<img src="../assets/image/34.png">
+        	<img :src='image[0]'>
         </div>
         <div class="foot">
         	<div class="shop">
-        	<img src="../assets/image/36.png">
-        	<span>购物车</span>
+        		<router-link :to="{path:'/shopcar'}">
+        		<img src="../assets/image/36.png">
+        		<span>购物车</span>
+        	</router-link>
         	</div>
         	<div class="add">
         	<span class='car'>加入购物车</span>
         	<span class="quite">立即购买</span>
         	</div>
         </div>
-
+		<Guarantee
+				v-show="gran"
+				v-on:showdigeo="showgran"
+				></Guarantee>
+		<Parameter
+			v-show="para"
+			v-on:showdigeo="showpara">
+		</Parameter>
+		<Custom
+			v-show="cust"
+			v-on:showdigeo="showcust">
+		></Custom>		
     </div>
+</transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
+	import Guarantee from '../components/part/Guarantee.vue'
+	import Parameter from '../components/part/Parameter.vue'
+	import Custom from '../components/part/Custom.vue'
+	import Vue from 'vue'
+	import { Cell, Checklist } from 'mint-ui';
+	Vue.component(Cell.name, Cell);
+	Vue.component(Checklist.name, Checklist);
     export default {
-        name: "Search",
+        name: "Part",
         components:{
-        	'top':Top
-    	}
+        	'top':Top,
+			Guarantee,
+			Parameter,
+			Custom
+        },
+        created(){
+        	this.$axios.get('/api/search').then(data=>{
+        		this.parment = data.data.data
+        		for(let i=0;i<this.parment.length;i++){
+        			this.image = this.parment[i].url
+        			this.ments = this.parment[i]
+        			return;
+        		}
+        	})
+        },
+		methods:{
+			showgran(){
+				this.gran = !this.gran;
+				this.$root.$el.style.background='#7f7f7f';
+			},
+			showpara(){
+				this.para = !this.para;
+				this.$root.$el.style.background='#7f7f7f';
+			},
+			showcust(){
+				this.cust = !this.cust;
+				this.$root.$el.style.background='#7f7f7f';
+			}
+
+		},
+        data(){
+            return {
+				gran:false,
+				para:false,
+				cust:false,
+				parment:[],
+				image:[],
+				ments:[]
+			}
+        }
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1.2s ease;
+}
+.fade-leave-active {
+	transition: all 1.2s ease;
+}
+.fade-enter, .fade-leave-to{
+	transform: translateX(750px);
+}
+
 .logo{
 	margin-top:0.24rem;
-	img{
-		height:2.45rem;
-		width:5.03rem;
-		margin-top:0.6rem;
-		margin-left:1.26rem;
-		margin-bottom:1.3rem;
-	}
-	ul{
-		width:1.5rem;
-		height:0.2rem;
-		margin:0 auto;
-		li{
-			width:0.2rem;
-			height:0.2rem;
-			background:#c6c8c7;
-			border-radius:50%;
-			float:left;
-			margin: 0 0.08rem;
+	.image{
+		overflow:hidden;
+		height:4rem;
+		margin: 0 auto;
+		margin-top:0.5rem;
+		margin-bottom:0.8rem;
+		img{
+			margin-top:0.5rem;
+			margin-left:0.25rem;
+			width:7rem;
+			height:3rem;
 		}
 	}
 }
@@ -112,6 +175,8 @@
 		margin-top:0.5rem;
 		height:1.1rem;
 		background:#f7f7f7;
+		opacity: 0.7;
+
 		span{
 			line-height:1.1rem;
 		}
@@ -158,6 +223,7 @@
 			margin-left:0.96rem;
 		}
 		span{
+			color:#ccc;
 			display:block;
 			margin-left:0.9rem;
 			margin-top:0.1rem;
@@ -191,8 +257,5 @@
 			line-height:0.8rem;
 		}
 	}
-}
-a{
-	color:#fff;
 }
 </style>

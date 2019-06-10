@@ -24,9 +24,9 @@
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Receving",
         components:{
         	'top':Top
     	}
@@ -71,8 +71,5 @@
 			background:#01bfbf;
 			margin-left:0.53rem;
 		}
-}
-a{
-	color:#fff;
 }
 </style>

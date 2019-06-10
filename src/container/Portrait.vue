@@ -1,4 +1,5 @@
 <template>
+	<transition name="fade">
     <div>
         <top></top>
         <ul>
@@ -31,12 +32,13 @@
 		</div>
 		<button>取消</button>
     </div>
+    </transition>
 </template>
 
 <script>
-	import Top from '../components/Child/Top.vue'
+	import Top from '../components/common/Top.vue'
     export default {
-        name: "Search",
+        name: "Head",
         components:{
         	'top':Top
         }
@@ -44,6 +46,15 @@
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1.2s ease;
+}
+.fade-leave-active {
+	transition: all 1.2s ease;
+}
+.fade-enter, .fade-leave-to{
+	transform: translateX(750px);
+}
 ul{
 	margin-top:0.2rem;
 	background:#7f7f7f;

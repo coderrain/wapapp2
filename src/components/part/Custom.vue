@@ -1,36 +1,29 @@
 <template>
     <div>
-    	<top></top>
-        <div class="black">
-        </div>
+       
         <div class="main">
         	<div class="show">
-        		<img src="../assets/image/38.png">
+        		<img :src="stom.url">
         		<div>
 	        		<span class="Sone">￥</span>
-	        		<span class="Stwo">2989.00</span>
+	        		<span class="Stwo">{{ stom.price }}</span>
         		</div>
         		<p>选择颜色分类尺码</p>
-        		<button>X</button>
+        		<button v-on:click="fn">X</button>
         	</div>
         	<h3>鞋码</h3>
         	<div class="num">
         		<ul>
-					<li>35</li>
-					<li>36</li>
-					<li>37</li>
-					<li>38</li>
-					<li>39</li>
-					<li>40</li>
-					<li class="four">41</li>
-					<li>42</li>
-					<li>43</li>
+        			<li v-for="item in cust">
+        				{{ item.size }}
+        			</li>
 				</ul>
         	</div>
         	<h3>颜色</h3>
         	<div class="col">
-        		<div>图片色</div>
-        		<div class="zong">棕色</div>
+        		<div v-for="item in cust">
+        			{{ item.col }}
+        		</div>
         	</div>
         	<h3>数量</h3>
         	<div class="count">
@@ -48,16 +41,42 @@
 </template>
 
 <script>
-    import Top from '../components/Child/Top.vue'
     export default {
-        name: "Search",
-        components:{
-        	'top':Top
-        }
+        name: "Custom",
+		methods:{
+			fn(){
+				this.$emit('showdigeo')
+				this.$root.$el.style.background='#fff';
+				
+			}
+		},
+		data(){
+			return {
+				cust:[],
+				stom:[]
+			}
+		},
+		created(){
+			this.$axios.get('/api/search').then(data=>{
+				this.cust = data.data.data
+				for(var i=0;i<this.cust.length;i++){
+					this.cust = this.cust[i]
+					this.stom = data.data.data[i]
+				}
+				this.cust = this.cust.type
+			})
+		}
     }
 </script>
 
 <style scoped lang="less">
+.main{
+	position:fixed;
+	left:0;
+	bottom:0;
+	background:#fff;
+	overflow: hidden;
+}
 .foot{
 	.add{
 		float:left;
@@ -86,19 +105,13 @@
 		}
 	}
 }
-.black{
-	height:2.48rem;
-	opacity:0.7;
-	margin-top:0.2rem;
-	background: #000 url('../assets/image/37.png') no-repeat center;
-	background-size:5rem 2rem;
-	z-index:100;
-}
 .main{
+	width:100%;
 	border-radius:0.3rem 0.3rem 0 0 ;
 	.show{
 		position: relative;
 		height:2.15rem;
+		width:100%;
 		border-radius:0.3rem 0.3rem 0 0 ;
 		P{
 			position: absolute;
@@ -236,8 +249,4 @@
 		}
 	}
 }
-a{
-	color:#fff;
-}
-
 </style>
