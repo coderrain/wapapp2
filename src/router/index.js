@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../container/Home.vue'
 import Search from '../container/Search.vue'
-import Fication from '../container/Fication.vue'
+
 import Part from '../container/Part.vue'
 import Payment from '../container/Payment.vue'
 import Receiving from '../container/Receiving.vue'
@@ -39,7 +39,7 @@ const routes = [
     /*分类列表*/
     path: '/fication',
     name: 'fication',
-    component: Fication
+    component: ()=> import('../container/Fication.vue')
 },{
     /*商品详情*/
     path: '/part/:id',

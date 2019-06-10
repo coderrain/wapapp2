@@ -37,7 +37,6 @@
         },
         components:{
         	'top':Top,
-
         },
         created(){
             this.fn(1)
@@ -64,7 +63,6 @@
         }
         	
     }
-
 </script>
 
 <style scoped lang="less">

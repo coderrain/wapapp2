@@ -1,12 +1,13 @@
 <template>
+	<transition name="fade">
     <div>
         <top></top>
         <div class="search">
         	<div>
         	<img src="../assets/image/24.png">
         	</div>
-			<input ref="ipt" type="" name="" placeholder="搜素商品">
-			<button @click="search">搜索</button>
+			<input type="" name="" placeholder="搜素商品">
+			<button>搜索</button>
         </div>
         <div class="hot">热搜</div>
         <div class="list">
@@ -16,17 +17,8 @@
         		</router-link>
         	</li>
         </div>
-        <div class="show">
-        	<ul>
-        		<li v-for="item in listShow">
-        			<p>类型:{{ item.title }}</p>
-        			<img :src="item.url" alt="">
-        			<span>价格:{{ item.price }}</span>
-        			<i>{{ item.chose }}人已经购买</i>
-        		</li>
-        	</ul>
-        </div>
     </div>
+    </transition>
 </template>
 
 <script>
@@ -35,42 +27,35 @@
 		name: "Search",
 		data(){
 			return{
-				hotsearch:[],
-				listShow:[]
+				hotsearch:[]
 			}
 		},
         components:{
         	'top':Top
     	},
     	created(){
-    		this.getList()
-    	},
-    	methods:{
-    		getList(){
-    			this.$axios.get('api/shopMark',{
-	    			params:{
-	    				"search":1
-	    			}
-	    		}).then(data=>{
-	    			this.hotsearch = data.data.data
-	    		})
-    		},
-    		search(){
-    			var ipt = this.$refs.ipt.value
-    			this.$axios.get('/api/search',{
-    				params:{
-    						title:ipt
-    				}
-    			}).then(data=>{
-    				console.log(data.data.data)
-    				this.listShow=data.data.data
-    			})
-    		}
+    		this.$axios.get('api/shopMark',{
+    			params:{
+    				"search":1
+    			}
+    		}).then(data=>{
+    			this.hotsearch = data.data.data
+    		})
+
     	}
     }
 </script>
 
 <style scoped lang="less">
+.fade-enter-active {
+	transition: all 1s ease;
+}
+.fade-leave-active {
+	transition: all 1s;
+}
+.fade-enter, .fade-leave-to{
+	transform: translateX(-750px);
+}
 .search{
 	div{	
 		height:0.6rem;
@@ -119,7 +104,6 @@
 }
 .list{
 	li{
-		float:left;
 		a{
 			margin-right:0.2rem;
 			padding-right:0.2rem;
@@ -136,38 +120,6 @@
 			color:#848787;
 		}
 		
-	}
-}
-.show{
-	li{
-		float:left;
-		margin-left:0.2rem;
-	}
-	float:left;
-	img{
-		width:1rem;
-		height:1rem;
-		margin-left:0.2rem;
-		float:left;
-	}
-	p{
-		margin: 0.1rem 0;
-		margin-left:0.2rem;
-		color:red;
-		font-size:0.28rem;
-	}
-	span{
-		font-weight:700;
-		display:block;
-		float:left;
-		margin-top:0.2rem;
-		font-size:0.26rem;
-		margin-left:0.8rem;
-	}
-	i{
-		display: block;
-		margin-top:0.8rem;
-		margin-left:2rem;
 	}
 }
 </style>
