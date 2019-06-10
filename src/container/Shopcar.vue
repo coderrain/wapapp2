@@ -1,5 +1,4 @@
 <template>
-	<transition name="fade">
     <div class="all">
         <top></top>
         <div v-for="item in list" class="main">
@@ -32,7 +31,6 @@
 			</div>
 		</div>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -71,16 +69,6 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-	transition: all 1s ease;
-}
-.fade-leave-active {
-	transition: all 1s;
-}
-.fade-enter, .fade-leave-to{
-	transform: translateX(-750px);
-}
-
 .main{
 	.shoping{
 		position:relative;

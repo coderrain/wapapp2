@@ -1,14 +1,13 @@
 <template>
-    <transition name="fade">
     <div>
         <top></top>
         <div class="search">
-			<input @keyup="ipt" ref="int" type="" name="" placeholder="搜素商品">
+			<input @click="ipt" ref="int" type="" name="" placeholder="搜素商品">
         </div>
     <div class="main">
     	<div class="list">
     		<ul>
-				<li @click="fn(item.id,$event)" v-for=" item in brand">
+				<li :class="{ active: isActive }" @click="fn(item.id,$event)" v-for=" item in brand">
 					{{ item.name }}
 				</li>
 			</ul>
@@ -23,7 +22,6 @@
     	</div>
     </div>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -33,7 +31,8 @@
         data(){
         	return {
         		brand:[],
-        		list:[]
+        		list:[],
+                isActive:false
         	}
         },
         components:{
@@ -41,43 +40,26 @@
 
         },
         created(){
+            this.fn(1)
         	this.$axios.get('/api/shopMark').then(data=>{
         		this.brand = data.data.data
         	})
         },
         methods:{
         	fn(item,event){
+                this.isActive = !this.Active
+                console.log(this.isActive)
                 this.$axios.get('/api/shopList',{
                     params:{
                         shopId:item
                     }
                 }).then(data=>{
                     this.list =  data.data.data
-                })  
-                var oUl = event.path[1].childNodes
-                console.log(oUl)
-                oUl.forEach(item=>{
-                    item.style.background="#ccc"
+                    console.log(this.list)
                 })
-                event.target.style.background="#fff"
-                oUl.style.background="#red"
-        		
-
         	},
             ipt(){
-               this.$axios.get('/api/search',{
-                    title:this.$refs.int.value
-               }).then(data=>{
-                this.list=[]
-                var data = data.data.data
-                var val = this.$refs.int.value
-                data.map(item=>{
-                    if(val==item.title){
-                        this.list.push(item)
-                    }
-                })
-                    
-               })
+               this.$router.push('/search')
             }
         }
         	
@@ -86,14 +68,8 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-    transition: all 1s ease;
-}
-.fade-leave-active {
-    transition: all 1s;
-}
-.fade-enter, .fade-leave-to{
-    transform: translateX(750px);
+.active{
+    background:#fff;
 }
 .search{
 	border-radius:0.3rem;
@@ -123,14 +99,15 @@
 		margin-left:0.15rem;
 	}
 }
- .main{
- 	margin-top:0.1rem;
+.main{
+ 	
  	.list{
+        margin-top:0.23rem;
  		float:left;
- 		width:1.85rem;
+ 		width:1.82rem;
  		li{
- 			width:1.85rem;
- 			height:1rem;
+ 			width:1.82rem;
+ 			height:1.03rem;
  			background:#eff3f2;
  			font-size:0.35rem;
  			text-align:center;
@@ -140,14 +117,14 @@
  	.show{
  		li{
  			float:left;
- 			width:1.88rem;
- 			height:1.88rem;
+ 			width:1.89rem;
+ 			height:1.89rem;
  			margin-top:0.51rem;
  			img{
 	 				width:1.2rem;
 	 				height:1.2rem;
-	 				margin-top:0.1rem;
-	 				margin-left:0.2rem;
+	 				margin-top:0.35rem;
+	 				margin-left:0.35rem;
  			}
  				
  			

@@ -1,5 +1,4 @@
 <template>
-	<transition name="fade">
     <div class="all">
         <top></top>
         <div class="nav">
@@ -43,7 +42,6 @@
         	</li>
         </ul>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -97,19 +95,6 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-	transition: all 1s ease;
-}
-.fade-leave-active {
-	transition: all 1s ease;
-}
-.fade-enter, .fade-leave-to{
-	opacity: 0;
-	transform: translateX(750px);
-}
-.all{
-	background:#f7f7f7;
-}
 .nav{
 	height:0.88rem;
 	margin-top:0.26rem;
