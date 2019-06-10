@@ -1,5 +1,4 @@
 <template>
-	<transition name="fade">
     <div>
         <top></top>
         <div class="log">
@@ -31,7 +30,6 @@
         	</div>
         </div>
     </div>
-</transition>
 </template>
 
 <script>
@@ -81,15 +79,6 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-	transition: all 1s ease;
-}
-.fade-leave-active {
-	transition: all 1s;
-}
-.fade-enter, .fade-leave-to{
-	transform: translateX(-750px);
-}
 .log{
 	height:2.26rem;
 	width:7.5rem;

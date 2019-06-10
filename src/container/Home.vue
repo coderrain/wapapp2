@@ -1,5 +1,4 @@
 <template>
-    <transition name="fade">
     <div>
         <h-header></h-header>
 		<div class="search">
@@ -27,9 +26,8 @@
                     </div>
                 </li>
             </ul>
-          </div>
-
-    </div>
+          </div>  
+        </div>
         <div class="enough">
             <img src="../assets/image/1.png">
         </div>
@@ -44,7 +42,7 @@
             <img src="../assets/image/15.png">
             <span>人气精选</span>
         </div>
-        <div class="list">
+        <div ref="list" class="list">
             <ul>
                 <li v-for="item in shopShoes">
                     <router-link :to="{name:'part',params:{id:item.id}}">
@@ -58,8 +56,8 @@
                 </li>
             </ul>
         </div>
+        <div class="all" v-if="isshow">全部加载成功</div>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -75,60 +73,81 @@
 				banner: '',
                 shopList:[],
                 shopJordan:[],
-                shopShoes:[]
+                shopShoes:[],
+                count:0,
+                isshow:false
 			}
 		},
         created(){
-            this.$axios.get('/api/shopList',{
-                params:{
-                    "hot":1
-                }
-            }).then(data=>{
-               this.hotSearchList = data.data.data
-               
-            })
-            this.$axios.get('/api/shopMark',{
-                params:{
-                    page:1,
-                    pageSize:8
-                }
-            }).then(data=>{
-               this.shopList = data.data.data
-               console.log(data.data.data)
-            })
-            this.$axios.get('/api/ad').then(data=>{
-               this.shopJordan = data.data.data
-               console.log(data.data.data)
-            })
-            this.$axios.get('/api/shopListPage',{
-                params:{
-                    page:1,
-                    pageSize:4
-                }
-            }).then(data=>{
-               this.shopShoes = data.data.data
-            })
+            this.getHotList()
+            this.getList()
+            this.getJor()
+            this.getShopShoes()
+            this.getLoadMore()
         },
 		methods: {
 			focusSearch(){
 				this.$router.push('/search')
-			}
+			},
+            getHotList(){
+                this.$axios.get('/api/shopList',{
+                    params:{
+                        "hot":1
+                    }
+                }).then(data=>{
+                   this.hotSearchList = data.data.data
+                   
+                })
+            },
+            getList(){
+                this.$axios.get('/api/shopMark',{
+                    params:{
+                        page:1,
+                        pageSize:8
+                    }
+                }).then(data=>{
+                   this.shopList = data.data.data
+                   console.log(data.data.data)
+                })
+            },
+            getJor(){
+                 this.$axios.get('/api/ad').then(data=>{
+                   this.shopJordan = data.data.data
+                })
+            },
+            getShopShoes(){
+                this.$axios.get('/api/shopListPage',{
+                    params:{
+                        page:++this.count,
+                        pageSize:2
+                    }
+                }).then(data=>{
+                      console.log(data.data.data)
+                    this.shopShoes = this.shopShoes.concat(data.data.data)
+                    if(data.data.data.length<2){
+                       window.onscroll = null
+                       this.isshow = true
+                       return false
+                    }
+                    
+                })
+            },
+            getLoadMore(){
+               window.onscroll = ()=>{
+                 var w = document.documentElement || document.body
+                 var Wh = w.clientHeight + w.scrollTop
+                 var  list = this.$refs.list
+                 var lT = list.offsetTop + list.offsetHeight
+                    if(lT+20<Wh){
+                       this.getShopShoes() 
+                    }
+               }
+            }
 		}
     }
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-    opacity: 0;
-    transition: all 2s ease;
-}
-.fade-leave-active {
-    opacity: 1;
-    transition: all 2s;
-}
-.fade-enter, .fade-leave-to{
-    transform: translateX(-750px);
-}
 .search{
 	height:1.55rem;
 	background:#51dfe0;
@@ -288,5 +307,13 @@
         }
     }
 }
-
+.all{
+    font-size:0.2rem;
+    width:100%;
+    height:0.2rem;
+    text-align:center;
+    line-height:0.2rem;
+    color:red; 
+    overflow: hidden;
+}
 </style>

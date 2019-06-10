@@ -1,5 +1,4 @@
 <template>
-	<transition name="fade">
     <div>
         <top></top>
         <ul>
@@ -32,7 +31,6 @@
 		</div>
 		<button>取消</button>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -46,15 +44,6 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-	transition: all 1.2s ease;
-}
-.fade-leave-active {
-	transition: all 1.2s ease;
-}
-.fade-enter, .fade-leave-to{
-	transform: translateX(750px);
-}
 ul{
 	margin-top:0.2rem;
 	background:#7f7f7f;

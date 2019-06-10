@@ -1,5 +1,4 @@
 <template>
-    <transition name="fade">
     <div>
         <top></top>
         <div class="hello">
@@ -8,7 +7,6 @@
 		<input ref="username" type="" name="" placeholder="请设置昵称">
 		<div class="ok" @click="fn">完成</div>
     </div>
-    </transition>
 </template>
 
 <script>
@@ -32,15 +30,6 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-    transition: all 1s ease;
-}
-.fade-leave-active {
-    transition: all 1s;
-}
-.fade-enter, .fade-leave-to{
-    transform: translateX(-750px);
-}
 .hello{
 	width:7.3rem;
 	height:0.9rem;

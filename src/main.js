@@ -4,20 +4,17 @@ import store from './store'
 //import axios from './base/axios'
 import App from './App.vue'
 import './assets/css/mormalize.css'
-import VueLazyLoad from 'vue-lazyload'
-Vue.use(VueLazyLoad)
 Vue.config.productionTip = false
 import axios from 'axios'
 import Mint from 'mint-ui';
 Vue.use(Mint)
+import { Lazyload } from 'mint-ui'
+Vue.use(Lazyload)
+
 
 
 Vue.prototype.$axios = axios
 
-Vue.use(VueLazyLoad,{
-  error: '',
-  loading: ''
-})
 
 new Vue({
   router, //注入router

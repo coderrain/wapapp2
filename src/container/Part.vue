@@ -1,5 +1,4 @@
 <template>
-	<transition name="fade">
     <div>
         <top></top>
         <div class="logo">
@@ -62,7 +61,6 @@
 			v-on:showdigeo="showcust">
 		></Custom>		
     </div>
-</transition>
 </template>
 
 <script>
@@ -121,16 +119,6 @@
 </script>
 
 <style scoped lang="less">
-.fade-enter-active {
-	transition: all 1.2s ease;
-}
-.fade-leave-active {
-	transition: all 1.2s ease;
-}
-.fade-enter, .fade-leave-to{
-	transform: translateX(750px);
-}
-
 .logo{
 	margin-top:0.24rem;
 	.image{
