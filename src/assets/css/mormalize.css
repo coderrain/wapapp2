@@ -75,6 +75,7 @@ pre {
 
 a {
     background-color: transparent;
+    color:#fff;
 }
 
 /**
@@ -95,6 +96,9 @@ abbr[title] {
 b,
 strong {
     font-weight: bolder;
+}
+a{
+    color:#fff;
 }
 
 /**
@@ -358,4 +362,10 @@ template {
 }
 body{
     font-size: .16rem;
+    max-width: 750px;
+    margin:0 auto;
+}
+
+input{
+    outline: none;
 }
