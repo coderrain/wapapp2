@@ -8,9 +8,6 @@ Vue.config.productionTip = false
 import axios from 'axios'
 import Mint from 'mint-ui';
 Vue.use(Mint)
-import { Lazyload } from 'mint-ui'
-Vue.use(Lazyload)
-
 
 
 Vue.prototype.$axios = axios

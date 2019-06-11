@@ -17,8 +17,6 @@ import Portrait from '../container/Portrait.vue'
 import Login from '../container/Login.vue'
 import Register from '../container/Register.vue'
 Vue.use(VueRouter)
-
-
 /*let Test = {
     template: `
         <div>test</div>
@@ -29,7 +27,7 @@ const routes = [
     /*商城首页*/
     path: '/',
     name: 'home',
-    component: Home
+    component:Home
 },{
     /*搜索列表*/
     path: '/search',
@@ -48,51 +46,81 @@ const routes = [
 },{
     name: 'user',
     path: '/user',
+    meta:{
+        isAuth:true
+    },
     component: User
 },{
     /*提交订单*/
     path: '/payment',
     name: 'payment',
+    meta:{
+        isAuth:true
+    },
     component:Payment
 },{
     /*填收货地址页面*/
     path: '/receiving',
     name: 'receiving',
+    meta:{
+        isAuth:true
+    },
     component:Receiving
 },{
     /*选择收货地址*/
     path: '/adm',
     name: 'adm',
+    meta:{
+        isAuth:true
+    },
     component:Adm
 },{
     /*订单页面*/
     path: '/order',
     name: 'order',
+    meta:{
+        isAuth:true
+    },
     component:Order
 },{
     /*购物车页面*/
     path: '/shopcar',
     name: 'shopcar',
+    meta:{
+        isAuth:true
+    },
     component:Shopcar
 },{
     /*订单确认*/
     path: '/overbooking',
     name: 'overbooking',
+    meta:{
+        isAuth:true
+    },
     component:Overbooking
 },{
     /*修改我的资料*/
     path: '/ours',
     name: 'ours',
+    meta:{
+        isAuth:true
+    },
     component:Ours
 },{
     /*修改我的名称*/
     path: '/username',
     name: 'username',
+    meta:{
+        isAuth:true
+    },
     component:Username
 },{
     /*修改我的头像*/
     path: '/portrait',
     name: 'portrait',
+    meta:{
+        isAuth:true
+    },
     component:Portrait
 },{
     /*登陆页面*/
@@ -109,9 +137,19 @@ const routes = [
 const router = new VueRouter({
     routes
 })
+import { setStrong } from '../base/strong.js'
+router.beforeEach((to,from,next)=>{
+    if(to.meta.isAuth){
+        if(localStorage.getItem('SetUser')){
+            next()
+        }else{
+            next({path:'/login'})
+        }
+    }else{
+         next()
+    }
+   
+})
 
 
 export default router;
-
-
-

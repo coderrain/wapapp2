@@ -162,7 +162,6 @@
 	.size{
 		margin-top:0.5rem;
 		height:1.1rem;
-		background:#f7f7f7;
 		opacity: 0.7;
 
 		span{

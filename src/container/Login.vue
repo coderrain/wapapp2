@@ -34,6 +34,7 @@
 
 <script>
 	import Top from '../components/common/Top.vue'
+	import { setStrong} from '../base/strong'
     export default {
         name: "Login",
         components:{
@@ -48,7 +49,6 @@
     		get(){
     			let user = this.$refs.username.value
     			let pass = this.$refs.password.value
-    			console.log(user.length)
     			if(user.length<=0 || pass.length<=0){
     				alert('请填写账号或者密码')
     				return;
@@ -57,9 +57,9 @@
     					username:user,
     					password:pass,
     					code:this.code
-    				
     			}).then(data=>{
     				if(data.data.code==1){
+    					setStrong('SetUser',data.data.data[0])
     					this.$router.push('/user')
     				}
     				else{

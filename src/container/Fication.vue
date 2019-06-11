@@ -7,8 +7,13 @@
     <div class="main">
     	<div class="list">
     		<ul>
-				<li :class="{ active: isActive }" @click="fn(item.id,$event)" v-for=" item in brand">
+				<li 
+                :class="{active:item.id==isActive}" 
+                @click="fn(item.id,$event)" 
+                v-for=" item in brand"
+                >
 					{{ item.name }}
+                
 				</li>
 			</ul>
     	</div>
@@ -32,12 +37,11 @@
         	return {
         		brand:[],
         		list:[],
-                isActive:false
+                isActive:1
         	}
         },
         components:{
         	'top':Top,
-
         },
         created(){
             this.fn(1)
@@ -47,15 +51,13 @@
         },
         methods:{
         	fn(item,event){
-                this.isActive = !this.Active
-                console.log(this.isActive)
+                this.isActive = item
                 this.$axios.get('/api/shopList',{
                     params:{
                         shopId:item
                     }
                 }).then(data=>{
                     this.list =  data.data.data
-                    console.log(this.list)
                 })
         	},
             ipt(){
@@ -68,9 +70,8 @@
 </script>
 
 <style scoped lang="less">
-.active{
-    background:#fff;
-}
+
+
 .search{
 	border-radius:0.3rem;
 	margin-top:0.44rem;
@@ -100,7 +101,6 @@
 	}
 }
 .main{
- 	
  	.list{
         margin-top:0.23rem;
  		float:left;
@@ -113,6 +113,9 @@
  			text-align:center;
  			line-height:0.9rem;
  		}
+        .active{
+            background:#fff;
+        }
  	}
  	.show{
  		li{

@@ -107,7 +107,6 @@
                     }
                 }).then(data=>{
                    this.shopList = data.data.data
-                   console.log(data.data.data)
                 })
             },
             getJor(){
@@ -122,7 +121,6 @@
                         pageSize:2
                     }
                 }).then(data=>{
-                      console.log(data.data.data)
                     this.shopShoes = this.shopShoes.concat(data.data.data)
                     if(data.data.data.length<2){
                        window.onscroll = null

@@ -3,7 +3,7 @@
         <top></top>
         <div v-for="item in list" class="main">
 			<div class="shoping">
-			<input ref="int" type="checkbox" name="">
+			<input @click="ipt(item.id)" ref="int" type="checkbox" name="">
 			<img :src="item.url">
 			<span class="desert">{{ item.name }}</span>
         	<div>
@@ -13,20 +13,20 @@
 			<p>
 				<span>￥{{ item.monye }}</span>
 				
-				<span class="jum">-</span>
-				<span class="num">1</span>
-				<span class="add">+</span>
+				<span @click="del(item.id)" class="jum">-</span>
+				<span class="num">{{ item.chose }}</span>
+				<span @click="by(item.id)" class="add">+</span>
 			</p>
 			</div>
         </div>
         <div class="foot">
 			<div class="election">
-				<input @click='fn' type="checkbox" name="" />
+				<input ref="all" @click='fn' type="checkbox" name="" />
 				全选
 			</div>
 			<div class="together">
-				<p>共一件:</p>
-				<span><i>￥{{ list.monye }}</i></span>
+				<p>共{{ num }}件:</p>
+				<span><i>￥{{ money }}</i></span>
 				<div>去结账</div>
 			</div>
 		</div>
@@ -42,27 +42,73 @@
 		},
 		data(){
 			return {
-				list:[]
+				list:[],
+				money:0,
+				num:0
 			}
 		},
 		created(){
 			this.$axios.get('/api/shopMark').then(data=>{
-				var result = data.data.data[10].shopcar
+				var result = data.data.data[11].shopcar
 				this.list = result
 			})
+			
 		},
 		methods:{
+			ber(id){
+				this.num+=this.list[id-1].chose
+				this.money+=this.list[id-1].chose*this.list[id-1].monye
+			},
 			fn(event){
 				if(event.target.checked){
 					this.$refs.int.map(item=>{
 						item.checked='true'
+						this.num = this.list.length
 					})
 				}else{
 					this.$refs.int.map(item=>{
 						item.checked=''
+						this.num=0
 					})
+				}	
+			},
+			by(id){
+				this.list.map(item=>{
+					if(item.id==id){
+						item.chose++
+					}
+				})
+				this.ber(id)
+			},
+			del(id){
+				this.list.map(item=>{
+					if(item.id==id){
+						if(item.chose<=0){
+							item.chose=0
+						}else{
+							item.chose--
+						}
+						
+					}
+				})
+				this.ber(id)
+			},
+			ipt(id){
+				this.list[id-1].chose=0
+				var all = this.$refs.all
+				var ipt = this.$refs.int
+				if(ipt[0].checked && ipt[1].checked && ipt[2].checked){
+					all.checked = 'checked'
+				}else{
+					all.checked=null
 				}
-				
+				ipt.map(item=>{
+					if(item.checked){
+						this.list[id-1].chose=1
+					}
+					
+				})
+				this.ber(id)
 			}
 		}
     }
@@ -117,15 +163,17 @@
 			float:left;
 			text-align:center;
 			line-height:0.4rem;
-			font-size:0.24rem;
+			font-size:0.28rem;
 			top:1.43rem;
 			left:5.8rem;
+			font-weight:700;
 		}
 		.add{
+			font-weight:700;
 			position:absolute;
 			top:1.43rem;
 			left:6.7rem;
-			font-size:0.24rem;
+			font-size:0.28rem;
 			line-height:0.4rem;
 			text-align:center;
 			border-radius:50%;
@@ -143,7 +191,7 @@
 		}
 		.num{
 			position: absolute;
-			left:6.4rem;
+			left:6.3rem;
 			font-size:0.35rem;
 			color:black;
 			margin-bottom:0.1rem;
@@ -208,7 +256,7 @@
 			}
 		}
 		div{
-			float:left;
+			float:right;
 			width:1.82rem;
 			height:0.8rem;
 			background:#01bfbf;
@@ -217,7 +265,6 @@
 			text-align:center;
 			line-height:0.8rem;
 			margin-top:0.15rem;
-			margin-left:0.22rem;
 			font-size:0.24rem;
 		}
 	}

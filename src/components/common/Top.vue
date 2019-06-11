@@ -4,6 +4,9 @@
             <h3>商品详情</h3>
                 <img @click="menuShow" src="../../assets/image/23.png">
             <div class="menu" v-show="menuIsActive">
+                <div class="san">
+                    <img src="../../assets/image/63.png" alt="">
+                </div>
                 <ul>
                     <li>
                         <img src="../../assets/image/18.png">
@@ -19,7 +22,9 @@
                     </li>
                     <li>
                         <img src="../../assets/image/21.png">
-                        <p>我的消息</p>
+                        <router-link :to="{path:'/login'}">
+                            <p>登陆</p>
+                        </router-link>
                     </li>
                     <li>
                         <img src="../../assets/image/21.png">
@@ -51,6 +56,18 @@
 
 <style scoped lang="less">
 .head{
+    .san{
+        width:0.33rem;
+        height:0.17rem;
+        position:absolute;
+        top:-0.17rem;
+        right: 0.15rem;
+        img{
+           width:100%;
+           height:100%;
+           margin-right:0;
+        }
+    }
     z-index:100;
     margin-top:0.3rem;
     position: relative;
@@ -81,12 +98,12 @@
     }
 }       
 .menu{
-    margin-top:0.5rem;
+    margin-top:0.8rem;
     position: absolute;
     right: .28rem;
     width:3.2rem;
     background: #3e3e3e;
-    border-radius:0.08rem;
+    border-radius:0.1rem;
     li{
        width:3.16rem;
        height:1.08rem;

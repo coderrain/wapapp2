@@ -11,5 +11,4 @@ const store = new Vuex.Store({
         home : Home
     }
 })
-
 export default store

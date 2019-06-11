@@ -3,14 +3,14 @@
         <top></top>
         <div class="nav">
         	<ul>
-				<li @click="all($event)">全部订单</li>
-				<li @click="wait(2,$event)">待付款</li>
-				<li @click="wait(3,$event)">待收货</li>
-				<li @click="wait(1,$event)">已完成</li>
+				<li :class="{active:isActive==0}" @click="all(0,$event)">全部订单</li>
+				<li :class="{active:isActive==2}" @click="wait(2,$event)">待付款</li>
+				<li :class="{active:isActive==3}" @click="wait(3,$event)">待收货</li>
+				<li :class="{active:isActive==1}" @click="wait(1,$event)">已完成</li>
 			</ul>
         </div>
         <ul>
-        	<li v-for="item in list">
+        	<li v-for="item in newList">
         		<div class="num">
 	        	<span>订单编号：{{ item.num}}</span>
 	        	<img :src="item.image">
@@ -34,7 +34,7 @@
 		        		<p>共一件商品 实付款</p>
 		        		<span><i>￥</i>{{ item.monye }}</span>
 		        		<ul>
-							<li>删除订单</li>
+							<li @click="del(item.id)">删除订单</li>
 							<li class="ok">确认订单</li>
 						</ul>
 		        	</div>
@@ -53,42 +53,37 @@
         },
         data(){
         	return {
-        		list:[]
-
+        		list:[],
+        		newList:[],
+        		isActive:0
         	}
         },
         methods:{
         	wait(id){
-        		var oLi = event.target.parentNode.children
-        		for(var i=0;i<oLi.length;i++){
-        			oLi[i].style.color = 'black'
-        		}
-        		event.target.style.color="#00c0c2"
+        		this.isActive = id
         		this.$axios.get('/api/shopMark').then(data=>{
-        			var result = data.data.data[10].shopcar
-        			this.list = []
-        			result.map(item=>{
-        				if(item.id==id){
-        					this.list= item
-        					console.log(this.list)
-        				}
-        			})	
+        			var result = data.data.data[11].shopcar	
+        			this.newList =  this.list = result
+        			console.log(this.newList)
+        			this.newList = this.newList.filter(item=>{
+        				return item.id == id
+        			})
         		})
         	},
-        	all(){
-        		var oLi = event.target.parentNode.children
-        		for(var i=0;i<oLi.length;i++){
-        			oLi[i].style.color = 'black'
-        		}
-        		event.target.style.color="#00c0c2"
-        		this.listed=[]
+        	all(id){
+        		this.isActive = id
         		this.$axios.get('/api/shopMark').then(data=>{
-        		var result = data.data.data[10].shopcar
-        		this.list = result
-        	})
+        			var result = data.data.data[11].shopcar
+        			this.newList =  this.list = result
+        		})
+        	},
+        	del(id){
+        		this.newList = this.newList.filter(item=>{
+        			return item.id !=id
+        		})
         	}
         },
-        created(){
+        mounted(){
         	this.all()
         }
     }
@@ -107,6 +102,9 @@
 		flex:1;
 		line-height:0.88rem;
 		font-size:0.28rem;
+	}
+	.active{
+		color:red;
 	}
 
 }
