@@ -4,7 +4,7 @@
         <div class="hello">
         	您好！请输入你要使用的昵称
         </div>
-		<input ref="username" type="" name="" placeholder="请设置昵称">
+		<input @click="del($event)" ref="username" type="" name="" placeholder="请设置昵称">
 		<div class="ok" @click="fn">完成</div>
     </div>
 </template>
@@ -24,7 +24,12 @@
     			}).then(data=>{
     				this.$router.push('/ours')
     			})
-    		}
+    		},
+            del(event){
+                if(event.screenX==334 ||event.screenY==236){
+                    this.$refs.username.value = ''
+                }
+            }
     	}
     }
 </script>
