@@ -3,7 +3,7 @@
         <top></top>
         <div v-for="item in list" class="main">
 			<div class="shoping">
-			<input @click="ipt(item.id)" ref="int" type="checkbox" name="">
+			<input v-model="item.checked" type="checkbox" name="">
 			<img :src="item.url">
 			<span class="desert">{{ item.name }}</span>
         	<div>
@@ -11,22 +11,21 @@
 				<span> 38</span>
 			</div>
 			<p>
-				<span>￥{{ item.monye }}</span>
+				<span>￥{{ item.money }}</span>
 				
-				<span @click="del(item.id)" class="jum">-</span>
+				<span @click="jump(item.id)" class="jum">-</span>
 				<span class="num">{{ item.chose }}</span>
-				<span @click="by(item.id)" class="add">+</span>
+				<span @click="add(item.id)" class="add">+</span>
 			</p>
 			</div>
         </div>
         <div class="foot">
 			<div class="election">
-				<input ref="all" @click='fn' type="checkbox" name="" />
+				<input v-model="all" type="checkbox" name="" />
 				全选
 			</div>
 			<div class="together">
-				<p>共{{ num }}件:</p>
-				<span><i>￥{{ money }}</i></span>
+				<span><i>￥{{ count }}</i></span>
 				<div>去结账</div>
 			</div>
 		</div>
@@ -42,73 +41,56 @@
 		},
 		data(){
 			return {
-				list:[],
-				money:0,
-				num:0
+				all:false,
+				list:[]
 			}
 		},
-		created(){
+		computed:{
+			count(){
+				return this.list.reduce((prev,next)=>{
+					if(next.checked){
+						return prev + next.money*next.chose
+					}else{
+						return prev
+					}
+				},0)
+			}
+		},
+		mounted(){
 			this.$axios.get('/api/shopMark').then(data=>{
 				var result = data.data.data[11].shopcar
 				this.list = result
+				this.list.map(item=>{
+				})
 			})
 			
 		},
-		methods:{
-			ber(id){
-				this.num+=this.list[id-1].chose
-				this.money+=this.list[id-1].chose*this.list[id-1].monye
-			},
-			fn(event){
-				if(event.target.checked){
-					this.$refs.int.map(item=>{
-						item.checked='true'
-						this.num = this.list.length
+		watch:{
+			all(val){
+				if(val){
+					this.list.map(item=>{
+						item.checked = true
 					})
 				}else{
-					this.$refs.int.map(item=>{
-						item.checked=''
-						this.num=0
+					this.list.map(item=>{
+						item.checked = false
 					})
-				}	
-			},
-			by(id){
-				this.list.map(item=>{
-					if(item.id==id){
-						item.chose++
-					}
-				})
-				this.ber(id)
-			},
-			del(id){
-				this.list.map(item=>{
-					if(item.id==id){
-						if(item.chose<=0){
-							item.chose=0
-						}else{
-							item.chose--
-						}
-						
-					}
-				})
-				this.ber(id)
-			},
-			ipt(id){
-				this.list[id-1].chose=0
-				var all = this.$refs.all
-				var ipt = this.$refs.int
-				if(ipt[0].checked && ipt[1].checked && ipt[2].checked){
-					all.checked = 'checked'
-				}else{
-					all.checked=null
 				}
-				ipt.map(item=>{
-					if(item.checked){
-						this.list[id-1].chose=1
-					}
-					
-				})
-				this.ber(id)
+			}
+		},
+		methods:{
+			add(id){
+				this.list[id-1].chose++
+			},
+			jump(id){
+				if(this.list[id-1].chose>0){
+					this.list[id-1].chose--
+				}
+				if(this.list[id-1].chose==0){
+					this.list[id-1].chose=0
+
+				}
+				
 			}
 		}
     }
