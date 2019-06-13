@@ -1,5 +1,5 @@
 # wapapp
-
+<img src="https://raw.githubusercontent.com/coderrain/wapapp2/master/public/favicon.ico">
 ## Project setup
 ```
 npm install
