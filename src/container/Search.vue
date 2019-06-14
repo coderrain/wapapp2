@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="search">
         	<div>
         	<img src="../assets/image/24.png">
@@ -10,8 +10,8 @@
         </div>
         <div class="hot">热搜</div>
         <div class="list">
-        	<li v-for="item in hotsearch">
-        		<router-link :to="{path:'/search',query:{name: item.name}}">
+        	<li v-for="item in hotsearch"  @click="searchList(item.name)">
+        		<router-link :to="{path:'/search/',query:{name: item.name}}">
         			{{ item.name }}
         		</router-link>
         	</li>
@@ -36,7 +36,8 @@
 		data(){
 			return{
 				hotsearch:[],
-				listShow:[]
+				listShow:[],
+				title:"搜索"
 			}
 		},
         components:{
@@ -60,6 +61,17 @@
     			this.$axios.get('/api/search',{
     				params:{
     						title:ipt
+    				}
+    			}).then(data=>{
+    				console.log(data.data.data)
+    				this.listShow=data.data.data
+    			})
+    		},
+    		searchList(name){
+    			console.log(this.$route.query.name)
+    			this.$axios.get('/api/search',{
+    				params:{
+    						title:name
     				}
     			}).then(data=>{
     				console.log(data.data.data)

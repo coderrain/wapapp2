@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <ul>
 			<li class="list">
 				<span>头像</span>
@@ -37,6 +37,11 @@
 	import Top from '../components/common/Top.vue'
     export default {
         name: "Head",
+        data(){
+        	return {
+        		title:"修改头像"
+        	}
+        },
         components:{
         	'top':Top
         }

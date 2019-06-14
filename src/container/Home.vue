@@ -6,7 +6,7 @@
 			<div class="hot">
 				<h3>热搜</h3>
 				<span v-for="item in hotSearchList">
-					<router-link :to="{path:'/search',query:{name: item.title}}">{{ item.title }}</router-link>
+					<router-link :to="{path:'/search',query:{name: item.name}}">{{ item.title }}</router-link>
 				</span>
 
 			</div>

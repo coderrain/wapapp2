@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="search">
 			<input @click="ipt" ref="int" type="" name="" placeholder="搜素商品">
         </div>
@@ -11,8 +11,7 @@
                 :class="{active:item.id==isActive}" 
                 @click="fn(item.id,$event)" 
                 v-for=" item in brand"
-                >
-					{{ item.name }}
+                >{{ item.name }}
                 
 				</li>
 			</ul>
@@ -37,7 +36,8 @@
         	return {
         		brand:[],
         		list:[],
-                isActive:1
+                isActive:1,
+                title:"分类"
         	}
         },
         components:{

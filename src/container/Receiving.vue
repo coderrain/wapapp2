@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
    		<div class="main">
    			<div>
    				<span>收货人</span>
@@ -29,6 +29,11 @@
         name: "Receving",
         components:{
         	'top':Top
+    	},
+    	data(){
+    		return {
+    			title:"修改地址"
+    		}
     	}
     }
 </script>

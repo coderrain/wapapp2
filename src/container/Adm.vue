@@ -1,6 +1,6 @@
 <template>
     <div>
-       	<top></top>
+       	<top v-bind:title="title"></top>
         <div class="name">
         	<div></div>        	
         	<p>王冉</p>
@@ -17,7 +17,11 @@
         	<span class="mup">></span>
         </div>
         <div class="call"></div>
-        <div class="new">新增收货地址</div>
+        <div class="new">
+		<router-link :to="{path:'/receiving'}">
+        新增收货地址
+    	</router-link>
+    </div>
     </div>
 </template>
 
@@ -27,6 +31,11 @@
         name: "Adm",
         components:{
         	'top':Top
+        },
+        data(){
+        	return {
+        		title:"选择收货地址"
+        	}
         }
     }
 </script>

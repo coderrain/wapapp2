@@ -1,11 +1,11 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="logo">
         	<div class="image">
 	        	<mt-swipe :auto="4000">
-				  <mt-swipe-item v-for="item in parment">
-				  	<img :src="item.url[0]" alt="">
+				  <mt-swipe-item v-for="item in ments">
+				  	<img :src="ments.url[0]" alt="">
 				  </mt-swipe-item>
 				</mt-swipe>
 			</div>
@@ -68,10 +68,6 @@
 	import Guarantee from '../components/part/Guarantee.vue'
 	import Parameter from '../components/part/Parameter.vue'
 	import Custom from '../components/part/Custom.vue'
-	import Vue from 'vue'
-	import { Cell, Checklist } from 'mint-ui';
-	Vue.component(Cell.name, Cell);
-	Vue.component(Checklist.name, Checklist);
     export default {
         name: "Part",
         components:{
@@ -93,15 +89,12 @@
 		methods:{
 			showgran(){
 				this.gran = !this.gran;
-				this.$root.$el.style.background='#7f7f7f';
 			},
 			showpara(){
 				this.para = !this.para;
-				this.$root.$el.style.background='#7f7f7f';
 			},
 			showcust(){
 				this.cust = !this.cust;
-				this.$root.$el.style.background='#7f7f7f';
 			}
 
 		},
@@ -112,7 +105,8 @@
 				cust:false,
 				parment:[],
 				image:[],
-				ments:[]
+				ments:[],
+				title:"商品详情"
 			}
         }
     }

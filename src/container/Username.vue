@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="hello">
         	您好！请输入你要使用的昵称
         </div>
@@ -16,6 +16,11 @@
         components:{
         	'top':Top
     	},
+        data(){
+            return {
+                title:"修改名称"
+            }
+        },
     	methods:{
     		fn(){
     			var user = this.$refs.username.value

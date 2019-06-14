@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="name">
         	<p>王冉</p>
 			<span class="num">188****1699</span>
@@ -50,6 +50,11 @@
 	import Top from '../components/common/Top.vue'
     export default {
         name: "Payment",
+        data(){
+        	return {
+        		title:"确认订单"
+        	}
+        },
         components:{
         	'top':Top
     	}

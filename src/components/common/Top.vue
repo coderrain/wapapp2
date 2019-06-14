@@ -1,7 +1,7 @@
 <template>
         <div class="head">
             <div @click="back" class="back">&lt;</div>
-            <h3>商品详情</h3>
+            <h3>{{ title }}</h3>
                 <img @click="menuShow" src="../../assets/image/23.png">
             <div class="menu" v-show="menuIsActive">
                 <div class="san">
@@ -38,6 +38,7 @@
 <script>
     export default {
         name: "Header",
+        props:['title'],
         data(){
             return {
                 menuIsActive:false
@@ -56,6 +57,7 @@
 
 <style scoped lang="less">
 .head{
+    position:relative;
     .san{
         width:0.33rem;
         height:0.17rem;
@@ -83,9 +85,10 @@
     }
     h3{
         text-align: center;
-        margin-left:2.9rem;
         font-size:0.32rem;
-        float:left;
+        position: absolute;
+        left: 40%;
+
     }
     img{
         width:0.42rem;

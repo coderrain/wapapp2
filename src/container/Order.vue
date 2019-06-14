@@ -1,6 +1,6 @@
 <template>
     <div class="all">
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="nav">
         	<ul>
 				<li :class="{active:isActive==0}" @click="all(0,$event)">全部订单</li>
@@ -55,14 +55,15 @@
         	return {
         		list:[],
         		newList:[],
-        		isActive:0
+        		isActive:0,
+        		title:"我的订单"
         	}
         },
         methods:{
         	wait(id){
         		this.isActive = id
-        		this.$axios.get('/api/shopMark').then(data=>{
-        			var result = data.data.data[11].shopcar	
+        		this.$axios.get('/api/shopMark/car').then(data=>{
+        			var result = data.data.data	
         			this.newList =  this.list = result
         			console.log(this.newList)
         			this.newList = this.newList.filter(item=>{
@@ -72,8 +73,8 @@
         	},
         	all(id){
         		this.isActive = id
-        		this.$axios.get('/api/shopMark').then(data=>{
-        			var result = data.data.data[11].shopcar
+        		this.$axios.get('/api/shopMark/car').then(data=>{
+        			var result = data.data.data
         			this.newList =  this.list = result
         		})
         	},

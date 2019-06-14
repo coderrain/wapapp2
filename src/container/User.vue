@@ -1,19 +1,24 @@
 <template>
     <div>
-       
-       <top></top>
+       <top v-bind:title="title"></top>
         <div class="name">
         	<div class="my">
         		<img src="../assets/image/48.png">
         		<h3>{{ name }}</h3>
         		<p>1602788223</p>
-        		<span><router-link :to="{path:'/ours'}">个人中心 ></router-link></span>
+        		<span>
+        			<router-link :to="{path:'/ours'}">
+        				个人中心 >
+        			</router-link>
+        		</span>
         	</div>
         	<div class="order">
         		<router-link :to="{path:'/order'}">
         		<div class="top">
         			<p>我的订单</p>
-        			<span>查看全部订单 ></span>
+        			<span>
+        				查看全部订单 >
+        			</span>
         		</div>
         		</router-link>
         		<router-link :to="{path:'/order'}">
@@ -45,7 +50,9 @@
 				</li>
 				<li>
 					<img src="../assets/image/53.png">
+					<router-link :to="{path:'/adm'}">
 					地址管理
+					</router-link>
 					<span>></span>
 				</li>
 				<li>
@@ -72,7 +79,8 @@
         },
         data(){
         	return {
-        		name:''
+        		name:'',
+        		title:"个人中心"
         	}
         },
         created(){
@@ -197,6 +205,6 @@
 	}
 }
 a{
-	color:#fff;
+	color:black;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
     <div class="all">
-        <top></top>
+        <top v-bind:title="title"></top>
         <div v-for="item in list" class="main">
 			<div class="shoping">
-			<input v-model="item.checked" type="checkbox" name="">
+			<el-checkbox  v-model="item.checked"></el-checkbox>
 			<img :src="item.url">
 			<span class="desert">{{ item.name }}</span>
         	<div>
@@ -21,14 +21,14 @@
         </div>
         <div class="foot">
 			<div class="election">
-				<input v-model="all" type="checkbox" name="" />
+				<el-checkbox id="check" v-model="all"></el-checkbox>
 				全选
 			</div>
 			<div class="together">
-				<span><i>￥{{ count }}</i></span>
+				<span><i>一共：￥{{ count }}</i></span>
 				<div>去结账</div>
 			</div>
-		</div>
+		</div>	
     </div>
 </template>
 
@@ -41,11 +41,24 @@
 		},
 		data(){
 			return {
-				all:false,
-				list:[]
+				list:[],
+				title:"购物车"
 			}
 		},
 		computed:{
+			all:{
+				get(){
+					return this.list.every(item=>{
+						return item.checked == true
+					})
+				},
+				set(val){
+					this.list = this.list.map(item=>{
+						item.checked = val?true:false
+						return item;
+					})
+				}
+			},
 			count(){
 				return this.list.reduce((prev,next)=>{
 					if(next.checked){
@@ -57,26 +70,11 @@
 			}
 		},
 		mounted(){
-			this.$axios.get('/api/shopMark').then(data=>{
-				var result = data.data.data[11].shopcar
+			this.$axios.get('/api/shopMark/car').then(data=>{
+				var result = data.data.data
 				this.list = result
-				this.list.map(item=>{
-				})
+				
 			})
-			
-		},
-		watch:{
-			all(val){
-				if(val){
-					this.list.map(item=>{
-						item.checked = true
-					})
-				}else{
-					this.list.map(item=>{
-						item.checked = false
-					})
-				}
-			}
 		},
 		methods:{
 			add(id){
@@ -180,18 +178,11 @@
 
 		}
 	}
-	input{
-		margin:0;
-		padding:0;
-		width:0.4rem;
-		height:0.4rem;
-		border-radius:0.5rem;
-		float:left;
-		border:1px solid black;
-		margin-left:0.42rem;
-		margin-right:0.22rem;
-		margin-top:0.8rem;
-	}
+}
+.el-checkbox{
+	float:left;
+	margin-left:30px;
+	margin-top:50px;
 }
 .foot{
 	position:fixed;
@@ -206,13 +197,10 @@
 		width:0.5rem;
 		height:1.1rem;
 		margin-left:0.2rem;
-		input{
-			width:0.4rem;
-			height:0.4rem;
-			border-radius:50%;
-			margin-left:0.05rem;
-			margin-top:0.24rem;
-			margin-bottom:0.1rem;
+		#check{
+			margin-top:15px;
+			margin-left:7px;
+			margin-bottom:8px;
 		}
 	}
 	.together{

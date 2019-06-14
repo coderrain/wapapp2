@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="log">
         	<img src="../assets/image/59.png">
         </div>
@@ -42,7 +42,8 @@
     	},
     	data(){
     		return {
-    			code:''
+    			code:'',
+    			title:"登录"
     		}
     	},
     	methods:{

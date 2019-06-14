@@ -1,6 +1,6 @@
 <template>
     <div>
-        <top></top>
+        <top v-bind:title="title"></top>
         <ul>
 			<li class="list">
 				<span>头像</span>
@@ -9,13 +9,14 @@
 					<strong>></strong>
 				
 			</li>
+			<router-link :to="{path:'/username'}">
 			<li class="list">
 				<span>昵称</span>
-				
-					<p><router-link :to="{path:'/username'}">{{ name }}</router-link></p>
+					<p>{{ name }}</p>
 					<strong>></strong>
 				
 			</li>
+			</router-link>
 			<li class="list">
 				<span>账号</span>
 				
@@ -36,7 +37,8 @@
     	},
     	data(){
     		return {
-    			name:''
+    			name:'',
+    			title:"详细资料"
     		}
     	},
     	created(){

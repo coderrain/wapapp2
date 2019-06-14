@@ -1,6 +1,6 @@
 <template>
     <div v-if="isshow">
-        <top></top>
+        <top v-bind:title="title"></top>
         <div class="log">
         	<img src="../assets/image/59.png">
         </div>
@@ -37,7 +37,8 @@
     	data(){
     		return {
     			code:'',
-    			isshow:true
+    			isshow:true,
+    			title:"注册"
     		}
     	},
     	methods:{
