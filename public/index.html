@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/mint-ui/lib/style.css">
+    <script src="https://unpkg.com/mint-ui/lib/index.js"></script>
+
     <title>wapapp</title>
     <script>
       var wW = document.documentElement.clientWidth || document.body.clientWidth;
+      wW = wW > 750? 750: wW;
       document.documentElement.style.fontSize = wW/(750/100) + 'px';
     </script>
   </head>
